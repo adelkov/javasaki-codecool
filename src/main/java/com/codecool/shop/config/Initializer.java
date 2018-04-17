@@ -57,6 +57,35 @@ public class Initializer implements ServletContextListener {
         }
     }
 
+    enum products {
+        EBLOCK1(new Product("S&S Cycle T143 Long Block", 9749.95f, "USD", "Engine block specially machined for HD Dyna models", productCategories.ENGINE.getCategory(), suppliers.SSCYCLE.getSupplier())),
+        EBLOCK2(new Product("S&S Cycle V80 Long Block", 4299.95f, "USD", "Replacement engine block for aging 80\" H-D Evolution engines", productCategories.ENGINE.getCategory(), suppliers.SSCYCLE.getSupplier())),
+        WHEEL1(new Product("Performance Machine Platinum Cut Supra Front Wheel", 1259.96f, "USD", "21 in. x 3.5 in. for Models w/o ABS (dual disc)", productCategories.WHEEL.getCategory(), suppliers.PMACHINES.getSupplier())),
+        WHEEL2(new Product("Drag Specialties Rear Laced Wheel", 359.95f, "USD", "Chrome 16x3 40-Spoke Laced Wheel Assembly", productCategories.WHEEL.getCategory(), suppliers.DRAGS.getSupplier())),
+        WHEEl3(new Product("Performance Machine Platinum Cut Front Aluminum Wheel", 1439.96f, "USD", "Platinum Cut 21 x 3.5 Revel One-Piece Chrome-Forged", productCategories.WHEEL.getCategory(), suppliers.PMACHINES.getSupplier())),
+        EXH1(new Product("Rinehart Black Slip-On Mufflers", 739.95f, "USD", "4 in. Slip-On Mufflers w/Slot End Caps", productCategories.EXHAUST.getCategory(), suppliers.RINEHART.getSupplier())),
+        EXH2(new Product("Rinehart ChromeSlip-On Mufflers", 379.95f, "USD", "3 in. Slip-On Mufflers w/Black Straight End Caps", productCategories.EXHAUST.getCategory(), suppliers.RINEHART.getSupplier())),
+        EXH3(new Product("Helix Racing Products Muffler Clamp", 26.95f, "USD", "Stainless Steel 4 in. x 5 in. Oval Muffler Clamp", productCategories.EXHAUST.getCategory(), suppliers.HELIX.getSupplier())),
+        FRAME1(new Product("Paughco Frame - S147T", 1099.76f, "USD", "Straight Leg Swingarm Frame", productCategories.CHASSIS.getCategory(), suppliers.PAUGHCO.getSupplier())),
+        FRAME2(new Product("Paughco Frame - SLP139S5", 1271.95f, "USD", "Single Loop Rigid Bobber Fork Frame", productCategories.CHASSIS.getCategory(), suppliers.PAUGHCO.getSupplier())),
+        FRAME3(new Product("Kraft Tech Frame - K16001", 719.88f, "USD", "Rigid Frame for Big Twin w/130 Tire", productCategories.CHASSIS.getCategory(), suppliers.KRAFT.getSupplier())),
+        FRAME4(new Product("Kraft Tech Frame - K15161", 924.88f, "USD", "Rigid Frame for 180 Rear Tire", productCategories.CHASSIS.getCategory(), suppliers.KRAFT.getSupplier())),
+        FRAME5(new Product("Paughco Frame Kit - R147FXR", 1524.56f, "USD", "Stock Style FXR Frame Kit", productCategories.CHASSIS.getCategory(), suppliers.PAUGHCO.getSupplier())),
+        SUIT1(new Product("Alpinestar GP Plus", 1999.95f, "USD", "1-Piece Leather Racing Suit", productCategories.SAFETYGEAR.getCategory(), suppliers.ALPINES.getSupplier())),
+        SUIT2(new Product("Cortech Latigo 2.0", 599.99f, "USD", "Race-ready 1-piece Leather Suit", productCategories.SAFETYGEAR.getCategory(), suppliers.CORTECH.getSupplier())),
+        GLOVE1(new Product("Alpinestar Techstar", 44.95f, "USD", "Motorcycle gloves", productCategories.SAFETYGEAR.getCategory(), suppliers.ALPINES.getSupplier()));
+
+        Product product;
+
+        products(Product prod){
+            this.product = prod;
+        }
+
+        public Product getProduct() {
+            return this.product;
+        }
+    }
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ProductDao productDataStore = ProductDaoMem.getInstance();
@@ -74,8 +103,8 @@ public class Initializer implements ServletContextListener {
         }
 
         //setting up products and printing it
-        productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
-        productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
-        productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
+        for (products product : products.values()) {
+            productDataStore.add(product.getProduct());
+        }
     }
 }
