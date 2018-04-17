@@ -7,6 +7,9 @@ import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.model.Order;
+import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -19,6 +22,8 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
+
+    private Order order = new Order();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -33,6 +38,12 @@ public class ProductController extends HttpServlet {
 //        Map params = new HashMap<>();
 //        params.put("category", productCategoryDataStore.find(1));
 //        params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
+
+        // add product to order object's cart multiset
+        if (req.getParameter("idToAdd") != null) {
+            Product productToAdd = productDataStore.find(Integer.parseInt(req.getParameter("idToAdd")));
+            order.addOneProduct(productToAdd);
+        }
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
