@@ -24,7 +24,11 @@ public class CheckoutServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("inputName");
-        System.out.println(name);
+        String email = req.getParameter("inputEmail");
+        String country = req.getParameter("inputCountry");
+        String address = req.getParameter("inputAddress");
+        String city = req.getParameter("inputCity");
+        String zip = req.getParameter("inputZip");
         if (name.equals("")){
             resp.sendRedirect("/checkout");
         } else {
