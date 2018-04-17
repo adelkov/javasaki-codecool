@@ -17,6 +17,24 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 public class Initializer implements ServletContextListener {
 
+    enum productCategories {
+        ENGINE(new ProductCategory("Engine block", "Drive", "Engine is the part which makes your motorcycle move")),
+        WHEEL(new ProductCategory("Wheel", "Drive", "Wheels, the rubber toruses make contact with the road surface.")),
+        EXHAUST(new ProductCategory("Exhaust", "Drive", "Gases from the engine makes its way out through the exhaust.")),
+        CHASSIS(new ProductCategory("Chassis", "Body frame", "The body of the motorcycle is mounted on the chassis")),
+        SAFETYGEAR(new ProductCategory("Safety gear", "Safety apparel", "These clothes save you in collision"));
+
+        ProductCategory category;
+
+        productCategories(ProductCategory pCat) {
+            this.category = pCat;
+        }
+
+        public ProductCategory getCategory(){
+            return this.category;
+        }
+    }
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ProductDao productDataStore = ProductDaoMem.getInstance();
@@ -30,8 +48,9 @@ public class Initializer implements ServletContextListener {
         supplierDataStore.add(lenovo);
 
         //setting up a new product category
-        ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
-        productCategoryDataStore.add(tablet);
+        for (productCategories pCat : productCategories.values()){
+            productCategoryDataStore.add(pCat.getCategory());
+        }
 
         //setting up products and printing it
         productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
