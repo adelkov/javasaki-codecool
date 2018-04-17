@@ -20,4 +20,15 @@ public class CheckoutServlet extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         engine.process("product/checkout_form.html", context, resp.getWriter());
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String name = req.getParameter("inputName");
+        System.out.println(name);
+        if (name.equals("")){
+            resp.sendRedirect("/checkout");
+        } else {
+            resp.sendRedirect("/payment");
+        }
+    }
 }
