@@ -35,6 +35,28 @@ public class Initializer implements ServletContextListener {
         }
     }
 
+    enum suppliers {
+        SSCYCLE(new Supplier("S&S Cycle", "Leader in performance motorcycle parts for Harley-Davidson")),
+        HELIX(new Supplier("Helix Racing Products", "Wholesale distributor of premium powersports equipment and tools")),
+        RINEHART(new Supplier("RINEHART", "Performance aftermarket exhaust systems")),
+        PMACHINES(new Supplier("Performance Machines", "Premium Chrome and Black Anodized Custom Motorcycle Forged Wheels")),
+        DRAGS(new Supplier("Drag Specialties", "High-quality parts for Harleys and V-Twins since 1968")),
+        PAUGHCO(new Supplier("Paugcho", "Finest int american-made products since 1969")),
+        KRAFT(new Supplier("Kraft Tech", "Quality motorcycle parts and accessories since 1990")),
+        ALPINES(new Supplier("Alpinestars", "World-leading manufacturer of professional racing products, motorcycling airbag protection, high-performance apparel, and technical footwear")),
+        CORTECH(new Supplier("Cortech", "Enhanced performance within the most demanding categories of riding"));
+
+        Supplier supplier;
+
+        suppliers(Supplier sup){
+            this.supplier = sup;
+        }
+
+        public Supplier getSupplier() {
+            return this.supplier;
+        }
+    }
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ProductDao productDataStore = ProductDaoMem.getInstance();
@@ -42,10 +64,9 @@ public class Initializer implements ServletContextListener {
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
         //setting up a new supplier
-        Supplier amazon = new Supplier("Amazon", "Digital content and services");
-        supplierDataStore.add(amazon);
-        Supplier lenovo = new Supplier("Lenovo", "Computers");
-        supplierDataStore.add(lenovo);
+        for (suppliers supp : suppliers.values()){
+            supplierDataStore.add(supp.getSupplier());
+        }
 
         //setting up a new product category
         for (productCategories pCat : productCategories.values()){
