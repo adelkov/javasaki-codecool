@@ -35,7 +35,14 @@
 
 <div class="container">
     <div class="well well-sm">
-        <strong th:text="${category.name}">Category Title</strong>
+        <!--<strong th:text="${category.name}">Category Title</strong>-->
+        <form action="/" method="POST">
+        <select name="filter_category">
+            <option th:each="category: ${categories}" th:value="${category.getId()}" th:text="${category.getName()}">Volvo</option>
+            <!--<option value="saab">Saab</option>-->
+            <input type="submit" value="Filter">
+        </select>
+        </form>
     </div>
 
     <div id="products" class="row list-group">
