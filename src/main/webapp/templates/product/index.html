@@ -25,19 +25,41 @@
             crossorigin="anonymous"></script>
 
     <!-- Font awesome css -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+          integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+
+    <!-- Google font css -->
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 </head>
 
 <body>
 
-<div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
-</div>
 
-<a style="position:fixed;top:200px;left:5px;margin:0;padding:5px 3px;" href="/cart">
-    <i class="fas fa-shopping-cart fa-3x"></i>
+<h1 class="head center-block row">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col col-md-5">
+                Javasaki <br>
+                <p class="sub-title center-block">Motorcycle store</p>
+            </div>
+            <div class="col-md-2">
+
+            </div>
+            <div class="col col-md-3">
+                <img src="/static/img/large_motorcycle.png" width="400px">
+            </div>
+        </div>
+    </div>
+</h1>
+
+<a id="shopping-cart" href="/cart">
+    <i class="fas fa-shopping-cart fa-3x" style="color: white"></i>
+    <br>
+    <p class="nr_of_items_in_cart">
+        XX item(s)
+    </p>
 </a>
 
 <div class="container">
@@ -55,14 +77,15 @@
                         th:text="${supplier.getName()}">
                 </option>
             </select>
+        </form>
     </div>
 
     <div id="products" class="row list-group">
-
         <div class="item col-xs-4 col-lg-4" th:each="prod,iterStat : ${products}">
             <div class="thumbnail">
                 <img class="group list-group-image" src="http://placehold.it/400x250/000/fff"
-                     th:attr="src='/static/img/product_' + ${prod.getId()} + '.jpg'" th:alt="${prod.getName()}" width="60%"/>
+                     th:attr="src='/static/img/product_' + ${prod.getId()} + '.jpg'" th:alt="${prod.getName()}"
+                     width="60%"/>
                 <div class="caption">
                     <h4 class="group inner list-group-item-heading" th:text="${prod.name}">Product name</h4>
                     <p class="group inner list-group-item-text" th:text="${prod.description}">Product
