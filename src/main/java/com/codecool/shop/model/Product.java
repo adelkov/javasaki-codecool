@@ -1,6 +1,7 @@
 package com.codecool.shop.model;
 
 import java.util.Currency;
+import java.util.HashMap;
 
 public class Product extends BaseModel {
 
@@ -8,6 +9,7 @@ public class Product extends BaseModel {
     private Currency defaultCurrency;
     private ProductCategory productCategory;
     private Supplier supplier;
+    private HashMap<MandatoryAttribute.allAttributes, String> productAttributes = new HashMap<>();
 
 
     public Product(String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
