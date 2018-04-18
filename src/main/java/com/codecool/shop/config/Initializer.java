@@ -91,11 +91,23 @@ public class Initializer implements ServletContextListener {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
+        setupSuppliers(supplierDataStore);
+
+        setupProductCategories(productCategoryDataStore);
+
+        setupProducts(productDataStore);
+
+        setupProductAttributes();
+    }
+
+    private void setupSuppliers(SupplierDao supplierDataStore) {
         //setting up a new supplier
         for (suppliers supp : suppliers.values()){
             supplierDataStore.add(supp.getSupplier());
         }
+    }
 
+    private void setupProductCategories(ProductCategoryDao productCategoryDataStore) {
         //setting up a new product category
         for (productCategories pCat : productCategories.values()){
             productCategoryDataStore.add(pCat.getCategory());
@@ -103,20 +115,24 @@ public class Initializer implements ServletContextListener {
 
         productCategories.ENGINE.getCategory().setMandatoryAttribute(AttributeFactory.newInstanceOfEngineAttribute());
         productCategories.WHEEL.getCategory().setMandatoryAttribute(AttributeFactory.newInstanceOfWheelAttribute());
+    }
 
+    private void setupProducts(ProductDao productDataStore) {
         //setting up products and printing it
         for (products product : products.values()) {
             productDataStore.add(product.getProduct());
         }
+    }
 
+    private void setupProductAttributes() {
         HashMap<MandatoryAttribute.allAttributes, String> engine1Attrib = new HashMap<>();
-        engine1Attrib.put(MandatoryAttribute.allAttributes.HP, "50");
+        engine1Attrib.put(MandatoryAttribute.allAttributes.HP, "70");
         engine1Attrib.put(MandatoryAttribute.allAttributes.EXHAUST_TUBE_NUMBER, "2");
         engine1Attrib.put(MandatoryAttribute.allAttributes.WEIGHT, "75 lbs");
         engine1Attrib.put(MandatoryAttribute.allAttributes.COLOR, "Black");
 
         HashMap<MandatoryAttribute.allAttributes, String> engine2Attrib = new HashMap<>();
-        engine2Attrib.put(MandatoryAttribute.allAttributes.HP, "70");
+        engine2Attrib.put(MandatoryAttribute.allAttributes.HP, "65");
         engine2Attrib.put(MandatoryAttribute.allAttributes.EXHAUST_TUBE_NUMBER, "2");
         engine2Attrib.put(MandatoryAttribute.allAttributes.WEIGHT, "77 lbs");
         engine2Attrib.put(MandatoryAttribute.allAttributes.COLOR, "Grey");
