@@ -116,6 +116,7 @@ public class Initializer implements ServletContextListener {
         productCategories.ENGINE.getCategory().setMandatoryAttribute(AttributeFactory.newInstanceOfEngineAttribute());
         productCategories.WHEEL.getCategory().setMandatoryAttribute(AttributeFactory.newInstanceOfWheelAttribute());
         productCategories.EXHAUST.getCategory().setMandatoryAttribute(AttributeFactory.newInstanceOfExhaustAttribute());
+        productCategories.CHASSIS.getCategory().setMandatoryAttribute(AttributeFactory.newInstanceOfChassisAttribute());
     }
 
     private void setupProducts(ProductDao productDataStore) {
@@ -176,6 +177,32 @@ public class Initializer implements ServletContextListener {
         exh3Attrib.put(MandatoryAttribute.allAttributes.DIAMETER, "4 in.");
         exh3Attrib.put(MandatoryAttribute.allAttributes.LENGTH, "5 in.");
 
+        HashMap<MandatoryAttribute.allAttributes, String> frame1Attrib = new HashMap<>();
+        frame1Attrib.put(MandatoryAttribute.allAttributes.LENGTH, "60 in.");
+        frame1Attrib.put(MandatoryAttribute.allAttributes.TYPE, "Straight leg");
+        frame1Attrib.put(MandatoryAttribute.allAttributes.COLOR, "Black");
+
+        HashMap<MandatoryAttribute.allAttributes, String> frame2Attrib = new HashMap<>();
+        frame2Attrib.put(MandatoryAttribute.allAttributes.LENGTH, "68 in.");
+        frame2Attrib.put(MandatoryAttribute.allAttributes.TYPE, "Single loop rigid");
+        frame2Attrib.put(MandatoryAttribute.allAttributes.COLOR, "Silver");
+
+        HashMap<MandatoryAttribute.allAttributes, String> frame3Attrib = new HashMap<>();
+        frame3Attrib.put(MandatoryAttribute.allAttributes.LENGTH, "65 in.");
+        frame3Attrib.put(MandatoryAttribute.allAttributes.TYPE, "Rigid");
+        frame3Attrib.put(MandatoryAttribute.allAttributes.COLOR, "Silver");
+
+        HashMap<MandatoryAttribute.allAttributes, String> frame4Attrib = new HashMap<>();
+        frame4Attrib.put(MandatoryAttribute.allAttributes.LENGTH, "65 in.");
+        frame4Attrib.put(MandatoryAttribute.allAttributes.TYPE, "Rigid");
+        frame4Attrib.put(MandatoryAttribute.allAttributes.COLOR, "Silver");
+
+        HashMap<MandatoryAttribute.allAttributes, String> frame5Attrib = new HashMap<>();
+        frame5Attrib.put(MandatoryAttribute.allAttributes.LENGTH, "63 in.");
+        frame5Attrib.put(MandatoryAttribute.allAttributes.TYPE, "Stock style FXR");
+        frame5Attrib.put(MandatoryAttribute.allAttributes.COLOR, "Silver");
+
+
 
         // TODO: Fill all items w/ attributes
 
@@ -188,6 +215,11 @@ public class Initializer implements ServletContextListener {
             products.EXH1.getProduct().setProductAttributes(exh1Attrib);
             products.EXH2.getProduct().setProductAttributes(exh2Attrib);
             products.EXH3.getProduct().setProductAttributes(exh3Attrib);
+            products.FRAME1.getProduct().setProductAttributes(frame1Attrib);
+            products.FRAME2.getProduct().setProductAttributes(frame2Attrib);
+            products.FRAME3.getProduct().setProductAttributes(frame3Attrib);
+            products.FRAME4.getProduct().setProductAttributes(frame4Attrib);
+            products.FRAME5.getProduct().setProductAttributes(frame5Attrib);
         } catch (FailedMandatoryKeys e) {
             System.out.println(e);
             System.exit(1);
