@@ -66,19 +66,25 @@
     padding: 5px 3px;
 }
 
+#shopping-cart:hover{
+    text-decoration: none;
+
+}
+
 .head {
     background: #252525;
     color: white;
     font-size: 46px;
-    font-family: 'Pacifico', cursive;
-    margin-top: 0px;
+    font-family: 'Rock Salt', cursive;
     padding-left: 60px;
     padding-bottom: 20px;
     padding-top: 20px;
+    margin-top: 0px;
     vertical-align: center;
 }
 
 .sub-title{
+    margin-top: 20px;
     font-size: 36px;
     color: darkgrey;
 }
@@ -91,8 +97,13 @@
     font-size: 10px;
     padding: 4px;
     margin-top: 4px;
+
 }
 
+.nr_of_items_in_cart:hover{
+    text-decoration: none;
+
+}
 
 .fa-shopping-cart {
     background: rgba(0,0,0,0.2);
@@ -103,6 +114,8 @@
 .fa-shopping-cart:hover {
     background: rgba(0,0,0,0.3);
     border-radius: 10px;
+    text-decoration: none;
+
 }
 
 .btn {
@@ -150,4 +163,8 @@
 
 img {
     z-index: -1;
+}
+
+#motor-image{
+    padding-bottom: 10px;
 }
