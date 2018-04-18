@@ -136,12 +136,36 @@ public class Initializer implements ServletContextListener {
         engine2Attrib.put(MandatoryAttribute.allAttributes.EXHAUST_TUBE_NUMBER, "2");
         engine2Attrib.put(MandatoryAttribute.allAttributes.WEIGHT, "77 lbs");
         engine2Attrib.put(MandatoryAttribute.allAttributes.COLOR, "Grey");
+        HashMap<MandatoryAttribute.allAttributes, String> wheel1Attrib = new HashMap<>();
+        wheel1Attrib.put(MandatoryAttribute.allAttributes.DIAMETER, "21 in.");
+        wheel1Attrib.put(MandatoryAttribute.allAttributes.MATERIAL, "Platinum");
+        wheel1Attrib.put(MandatoryAttribute.allAttributes.COLOR, "Black");
+        wheel1Attrib.put(MandatoryAttribute.allAttributes.TYPE, "1-Piece");
+        wheel1Attrib.put(MandatoryAttribute.allAttributes.POSITION, "Front");
+
+        HashMap<MandatoryAttribute.allAttributes, String> wheel2Attrib = new HashMap<>();
+        wheel2Attrib.put(MandatoryAttribute.allAttributes.DIAMETER, "16 in.");
+        wheel2Attrib.put(MandatoryAttribute.allAttributes.MATERIAL, "Platinum");
+        wheel2Attrib.put(MandatoryAttribute.allAttributes.COLOR, "Chrome");
+        wheel2Attrib.put(MandatoryAttribute.allAttributes.TYPE, "40-Spoke Laced");
+        wheel2Attrib.put(MandatoryAttribute.allAttributes.POSITION, "Front");
+
+        HashMap<MandatoryAttribute.allAttributes, String> wheel3Attrib = new HashMap<>();
+        wheel3Attrib.put(MandatoryAttribute.allAttributes.DIAMETER, "21 in.");
+        wheel3Attrib.put(MandatoryAttribute.allAttributes.MATERIAL, "Platinum");
+        wheel3Attrib.put(MandatoryAttribute.allAttributes.COLOR, "Black");
+        wheel3Attrib.put(MandatoryAttribute.allAttributes.TYPE, "1-Piece");
+        wheel3Attrib.put(MandatoryAttribute.allAttributes.POSITION, "Front");
+
 
         // TODO: Fill all items w/ attributes
 
         try {
             products.EBLOCK1.getProduct().setProductAttributes(engine1Attrib);
             products.EBLOCK2.getProduct().setProductAttributes(engine2Attrib);
+            products.WHEEL1.getProduct().setProductAttributes(wheel1Attrib);
+            products.WHEEL2.getProduct().setProductAttributes(wheel2Attrib);
+            products.WHEEl3.getProduct().setProductAttributes(wheel3Attrib);
         } catch (FailedMandatoryKeys e) {
             System.out.println(e);
             System.exit(1);

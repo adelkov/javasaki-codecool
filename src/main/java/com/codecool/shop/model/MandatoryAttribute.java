@@ -9,7 +9,8 @@ public class MandatoryAttribute {
         MATERIAL,
         TYPE,
         HP,
-        EXHAUST_TUBE_NUMBER
+        EXHAUST_TUBE_NUMBER,
+        POSITION
     }
 
     private allAttributes[] mandatory;

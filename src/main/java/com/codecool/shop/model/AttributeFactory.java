@@ -9,7 +9,7 @@ public class AttributeFactory {
     }
 
     public static MandatoryAttribute newInstanceOfWheelAttribute() {
-        return new MandatoryAttribute(allAttributes.DIAMETER, allAttributes.TYPE, allAttributes.MATERIAL, allAttributes.COLOR);
+        return new MandatoryAttribute(allAttributes.DIAMETER, allAttributes.TYPE, allAttributes.MATERIAL, allAttributes.COLOR, allAttributes.POSITION);
     }
 
     // TODO: Finish all categories
