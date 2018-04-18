@@ -62,6 +62,20 @@ public class Product extends BaseModel {
         this.supplier.addProduct(this);
     }
 
+    public HashMap<MandatoryAttribute.allAttributes, String> getProductAttributes() {
+        return this.productAttributes;
+    }
+
+    public void setProductAttributes(HashMap<MandatoryAttribute.allAttributes, String> attributes) throws FailedMandatoryKeys {
+        MandatoryAttribute mandatories = this.productCategory.getMandatoryAttributes();
+        for (MandatoryAttribute.allAttributes currAttribute : mandatories.getAttributes()){
+            if (!attributes.containsKey(currAttribute)) {
+                throw new FailedMandatoryKeys();
+            }
+        }
+        this.productAttributes = attributes;
+    }
+
     @Override
     public String toString() {
         return String.format("id: %1$d, " +
