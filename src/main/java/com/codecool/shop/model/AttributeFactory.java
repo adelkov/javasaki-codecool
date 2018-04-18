@@ -20,5 +20,7 @@ public class AttributeFactory {
         return new MandatoryAttribute(allAttributes.LENGTH, allAttributes.COLOR, allAttributes.TYPE);
     }
 
-    // TODO: Finish all categories
+    public static MandatoryAttribute newInstanceOfSafetyGearAttribute() {
+        return new MandatoryAttribute(allAttributes.TYPE, allAttributes.COLOR, allAttributes.MATERIAL);
+    }
 }

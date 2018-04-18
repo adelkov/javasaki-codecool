@@ -117,6 +117,7 @@ public class Initializer implements ServletContextListener {
         productCategories.WHEEL.getCategory().setMandatoryAttribute(AttributeFactory.newInstanceOfWheelAttribute());
         productCategories.EXHAUST.getCategory().setMandatoryAttribute(AttributeFactory.newInstanceOfExhaustAttribute());
         productCategories.CHASSIS.getCategory().setMandatoryAttribute(AttributeFactory.newInstanceOfChassisAttribute());
+        productCategories.SAFETYGEAR.getCategory().setMandatoryAttribute(AttributeFactory.newInstanceOfSafetyGearAttribute());
     }
 
     private void setupProducts(ProductDao productDataStore) {
@@ -202,9 +203,20 @@ public class Initializer implements ServletContextListener {
         frame5Attrib.put(MandatoryAttribute.allAttributes.TYPE, "Stock style FXR");
         frame5Attrib.put(MandatoryAttribute.allAttributes.COLOR, "Silver");
 
+        HashMap<MandatoryAttribute.allAttributes, String> gear1Attrib = new HashMap<>();
+        gear1Attrib.put(MandatoryAttribute.allAttributes.COLOR, "White/Black/Red");
+        gear1Attrib.put(MandatoryAttribute.allAttributes.MATERIAL, "Leather");
+        gear1Attrib.put(MandatoryAttribute.allAttributes.TYPE, "1-Piece Suit");
 
+        HashMap<MandatoryAttribute.allAttributes, String> gear2Attrib = new HashMap<>();
+        gear2Attrib.put(MandatoryAttribute.allAttributes.COLOR, "Black/White/Red");
+        gear2Attrib.put(MandatoryAttribute.allAttributes.MATERIAL, "Leather");
+        gear2Attrib.put(MandatoryAttribute.allAttributes.TYPE, "1-Piece Suit");
 
-        // TODO: Fill all items w/ attributes
+        HashMap<MandatoryAttribute.allAttributes, String> gear3Attrib = new HashMap<>();
+        gear3Attrib.put(MandatoryAttribute.allAttributes.COLOR, "Black/Red");
+        gear3Attrib.put(MandatoryAttribute.allAttributes.MATERIAL, "Leather");
+        gear3Attrib.put(MandatoryAttribute.allAttributes.TYPE, "Glove");
 
         try {
             products.EBLOCK1.getProduct().setProductAttributes(engine1Attrib);
@@ -220,6 +232,9 @@ public class Initializer implements ServletContextListener {
             products.FRAME3.getProduct().setProductAttributes(frame3Attrib);
             products.FRAME4.getProduct().setProductAttributes(frame4Attrib);
             products.FRAME5.getProduct().setProductAttributes(frame5Attrib);
+            products.SUIT1.getProduct().setProductAttributes(gear1Attrib);
+            products.SUIT2.getProduct().setProductAttributes(gear2Attrib);
+            products.GLOVE1.getProduct().setProductAttributes(gear3Attrib);
         } catch (FailedMandatoryKeys e) {
             System.out.println(e);
             System.exit(1);
