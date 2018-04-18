@@ -40,6 +40,10 @@
     <i class="fas fa-shopping-cart fa-3x"></i>
 </a>
 
+<button class="btn btn-ok" style="position:fixed;top:250px;left:5px;margin:0;padding:5px 3px; color:darkred; visibility: hidden;" id="doComparison">
+    Comapre items
+</button>
+
 <div class="container">
     <div class="well well-sm">
         <form action="/" method="POST">
@@ -70,6 +74,9 @@
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
                             <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <input type="checkbox" class="productCompare" th:name="'product_' + ${prod.getId()}" /> Compare
                         </div>
                         <div class="col-xs-12 col-md-6">
                             <a class="btn btn-success" th:href="@{/(idToAdd=${prod.getId()})}">Add to cart</a>
