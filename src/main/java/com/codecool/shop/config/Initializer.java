@@ -138,7 +138,8 @@ public class Initializer implements ServletContextListener {
         engine2Attrib.put(MandatoryAttribute.allAttributes.HP, "65");
         engine2Attrib.put(MandatoryAttribute.allAttributes.EXHAUST_TUBE_NUMBER, "2");
         engine2Attrib.put(MandatoryAttribute.allAttributes.WEIGHT, "77 lbs");
-        engine2Attrib.put(MandatoryAttribute.allAttributes.COLOR, "Grey");
+        engine2Attrib.put(MandatoryAttribute.allAttributes.COLOR, "Silver");
+
         HashMap<MandatoryAttribute.allAttributes, String> wheel1Attrib = new HashMap<>();
         wheel1Attrib.put(MandatoryAttribute.allAttributes.DIAMETER, "21 in.");
         wheel1Attrib.put(MandatoryAttribute.allAttributes.MATERIAL, "Platinum");
