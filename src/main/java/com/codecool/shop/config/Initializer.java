@@ -6,13 +6,12 @@ import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
-import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.Supplier;
+import com.codecool.shop.model.*;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.util.HashMap;
 
 @WebListener
 public class Initializer implements ServletContextListener {
@@ -102,9 +101,34 @@ public class Initializer implements ServletContextListener {
             productCategoryDataStore.add(pCat.getCategory());
         }
 
+        productCategories.ENGINE.getCategory().setMandatoryAttribute(AttributeFactory.newInstanceOfEngineAttribute());
+        productCategories.WHEEL.getCategory().setMandatoryAttribute(AttributeFactory.newInstanceOfWheelAttribute());
+
         //setting up products and printing it
         for (products product : products.values()) {
             productDataStore.add(product.getProduct());
+        }
+
+        HashMap<MandatoryAttribute.allAttributes, String> engine1Attrib = new HashMap<>();
+        engine1Attrib.put(MandatoryAttribute.allAttributes.HP, "50");
+        engine1Attrib.put(MandatoryAttribute.allAttributes.EXHAUST_TUBE_NUMBER, "2");
+        engine1Attrib.put(MandatoryAttribute.allAttributes.WEIGHT, "75 lbs");
+        engine1Attrib.put(MandatoryAttribute.allAttributes.COLOR, "Black");
+
+        HashMap<MandatoryAttribute.allAttributes, String> engine2Attrib = new HashMap<>();
+        engine2Attrib.put(MandatoryAttribute.allAttributes.HP, "70");
+        engine2Attrib.put(MandatoryAttribute.allAttributes.EXHAUST_TUBE_NUMBER, "2");
+        engine2Attrib.put(MandatoryAttribute.allAttributes.WEIGHT, "77 lbs");
+        engine2Attrib.put(MandatoryAttribute.allAttributes.COLOR, "Grey");
+
+        // TODO: Fill all items w/ attributes
+
+        try {
+            products.EBLOCK1.getProduct().setProductAttributes(engine1Attrib);
+            products.EBLOCK2.getProduct().setProductAttributes(engine2Attrib);
+        } catch (FailedMandatoryKeys e) {
+            System.out.println(e);
+            System.exit(1);
         }
     }
 }
