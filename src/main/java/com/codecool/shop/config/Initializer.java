@@ -63,7 +63,7 @@ public class Initializer implements ServletContextListener {
         WHEEL2(new Product("Drag Specialties Rear Laced Wheel", 359.95f, "USD", "Chrome 16x3 40-Spoke Laced Wheel Assembly", productCategories.WHEEL.getCategory(), suppliers.DRAGS.getSupplier())),
         WHEEl3(new Product("Performance Machine Platinum Cut Front Aluminum Wheel", 1439.96f, "USD", "Platinum Cut 21 x 3.5 Revel One-Piece Chrome-Forged", productCategories.WHEEL.getCategory(), suppliers.PMACHINES.getSupplier())),
         EXH1(new Product("Rinehart Black Slip-On Mufflers", 739.95f, "USD", "4 in. Slip-On Mufflers w/Slot End Caps", productCategories.EXHAUST.getCategory(), suppliers.RINEHART.getSupplier())),
-        EXH2(new Product("Rinehart ChromeSlip-On Mufflers", 379.95f, "USD", "3 in. Slip-On Mufflers w/Black Straight End Caps", productCategories.EXHAUST.getCategory(), suppliers.RINEHART.getSupplier())),
+        EXH2(new Product("Rinehart Chrome Slip-On Mufflers", 379.95f, "USD", "3 in. Slip-On Mufflers w/Black Straight End Caps", productCategories.EXHAUST.getCategory(), suppliers.RINEHART.getSupplier())),
         EXH3(new Product("Helix Racing Products Muffler Clamp", 26.95f, "USD", "Stainless Steel 4 in. x 5 in. Oval Muffler Clamp", productCategories.EXHAUST.getCategory(), suppliers.HELIX.getSupplier())),
         FRAME1(new Product("Paughco Frame - S147T", 1099.76f, "USD", "Straight Leg Swingarm Frame", productCategories.CHASSIS.getCategory(), suppliers.PAUGHCO.getSupplier())),
         FRAME2(new Product("Paughco Frame - SLP139S5", 1271.95f, "USD", "Single Loop Rigid Bobber Fork Frame", productCategories.CHASSIS.getCategory(), suppliers.PAUGHCO.getSupplier())),
@@ -115,6 +115,7 @@ public class Initializer implements ServletContextListener {
 
         productCategories.ENGINE.getCategory().setMandatoryAttribute(AttributeFactory.newInstanceOfEngineAttribute());
         productCategories.WHEEL.getCategory().setMandatoryAttribute(AttributeFactory.newInstanceOfWheelAttribute());
+        productCategories.EXHAUST.getCategory().setMandatoryAttribute(AttributeFactory.newInstanceOfExhaustAttribute());
     }
 
     private void setupProducts(ProductDao productDataStore) {
@@ -157,6 +158,24 @@ public class Initializer implements ServletContextListener {
         wheel3Attrib.put(MandatoryAttribute.allAttributes.TYPE, "1-Piece");
         wheel3Attrib.put(MandatoryAttribute.allAttributes.POSITION, "Front");
 
+        HashMap<MandatoryAttribute.allAttributes, String> exh1Attrib = new HashMap<>();
+        exh1Attrib.put(MandatoryAttribute.allAttributes.TYPE, "Slip-on muffler");
+        exh1Attrib.put(MandatoryAttribute.allAttributes.COLOR, "Black");
+        exh1Attrib.put(MandatoryAttribute.allAttributes.DIAMETER, "4 in.");
+        exh1Attrib.put(MandatoryAttribute.allAttributes.LENGTH, "16 in.");
+
+        HashMap<MandatoryAttribute.allAttributes, String> exh2Attrib = new HashMap<>();
+        exh2Attrib.put(MandatoryAttribute.allAttributes.TYPE, "Slip-on muffler");
+        exh2Attrib.put(MandatoryAttribute.allAttributes.COLOR, "Black");
+        exh2Attrib.put(MandatoryAttribute.allAttributes.DIAMETER, "3 in.");
+        exh2Attrib.put(MandatoryAttribute.allAttributes.LENGTH, "14 in.");
+
+        HashMap<MandatoryAttribute.allAttributes, String> exh3Attrib = new HashMap<>();
+        exh3Attrib.put(MandatoryAttribute.allAttributes.TYPE, "Muffler clamp");
+        exh3Attrib.put(MandatoryAttribute.allAttributes.COLOR, "Black");
+        exh3Attrib.put(MandatoryAttribute.allAttributes.DIAMETER, "4 in.");
+        exh3Attrib.put(MandatoryAttribute.allAttributes.LENGTH, "5 in.");
+
 
         // TODO: Fill all items w/ attributes
 
@@ -166,6 +185,9 @@ public class Initializer implements ServletContextListener {
             products.WHEEL1.getProduct().setProductAttributes(wheel1Attrib);
             products.WHEEL2.getProduct().setProductAttributes(wheel2Attrib);
             products.WHEEl3.getProduct().setProductAttributes(wheel3Attrib);
+            products.EXH1.getProduct().setProductAttributes(exh1Attrib);
+            products.EXH2.getProduct().setProductAttributes(exh2Attrib);
+            products.EXH3.getProduct().setProductAttributes(exh3Attrib);
         } catch (FailedMandatoryKeys e) {
             System.out.println(e);
             System.exit(1);

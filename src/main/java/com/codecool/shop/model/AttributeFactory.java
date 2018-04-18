@@ -12,5 +12,9 @@ public class AttributeFactory {
         return new MandatoryAttribute(allAttributes.DIAMETER, allAttributes.TYPE, allAttributes.MATERIAL, allAttributes.COLOR, allAttributes.POSITION);
     }
 
+    public static MandatoryAttribute newInstanceOfExhaustAttribute() {
+        return new MandatoryAttribute(allAttributes.TYPE, allAttributes.COLOR, allAttributes.DIAMETER, allAttributes.LENGTH);
+    }
+
     // TODO: Finish all categories
 }
