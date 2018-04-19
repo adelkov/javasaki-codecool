@@ -25,6 +25,7 @@
             crossorigin="anonymous"></script>
 
     <script src="/static/js/comparison.js" rel="script"></script>
+    <script src="/static/js/index.js" rel="script"></script>
 
     <!-- Font awesome css -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
@@ -59,8 +60,9 @@
 <a id="shopping-cart" href="/cart">
     <i class="fas fa-shopping-cart fa-3x" style="color: white"></i>
     <br>
-    <p class="nr_of_items_in_cart">
-        XX item(s)
+    <p class="nr_of_items_in_cart" id="cartLabel" th:text="${cartSize+' items'}"
+        th:data="${cartSize}"
+        >
     </p>
 </a>
 
@@ -70,7 +72,7 @@
 
 <div class="container">
     <div class="well well-sm">
-        <form action="/" method="POST">
+        <form action="/shop" method="POST">
             <select name="filter_category" onchange="this.form.submit()">
                 <option value="" selected>Choose category</option>
                 <option th:each="category: ${categories}" th:value="${category.getId()}"
@@ -104,7 +106,7 @@
                             <input type="checkbox" class="productCompare" th:name="'product_' + ${prod.getId()}" /> Compare
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <a class="btn btn-success" th:href="@{/(idToAdd=${prod.getId()})}">Add to cart</a>
+                            <a class="btn btn-success" th:href="@{/shop(idToAdd=${prod.getId()})}">Add to cart</a>
                         </div>
                     </div>
                 </div>
