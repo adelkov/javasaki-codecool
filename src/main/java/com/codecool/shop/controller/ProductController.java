@@ -10,6 +10,8 @@ import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
+import netscape.javascript.JSObject;
+import org.json.simple.JSONObject;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -73,10 +75,23 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(!req.getParameter("filter_category").equals("")){
-            doGet(req, resp, Integer.parseInt(req.getParameter("filter_category")), "category");
-        }else{
-            doGet(req, resp, Integer.parseInt(req.getParameter("filter_supplier")), "supplier");
+        String productID = req.getParameter("id");
+        if (productID != null) {
+            ProductDao productDataStore = ProductDaoMem.getInstance();
+            Product product = productDataStore.find(Integer.parseInt(productID));
+
+            JSONObject productJSON = new JSONObject();
+            productJSON.put("name", product.getName());
+            productJSON.put("supplier", product.getSupplier().getName());
+
+            resp.setContentType("application/json");
+            resp.getWriter().print(productJSON);
+        } else {
+            if(!req.getParameter("filter_category").equals("")){
+                doGet(req, resp, Integer.parseInt(req.getParameter("filter_category")), "category");
+            }else{
+                doGet(req, resp, Integer.parseInt(req.getParameter("filter_supplier")), "supplier");
+            }
         }
 
     }
