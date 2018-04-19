@@ -27,6 +27,10 @@
             crossorigin="anonymous"></script>
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+
+    <!-- Google font css -->
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Permanent+Marker|Rock+Salt" rel="stylesheet">
+
 </head>
 <body>
 
@@ -48,6 +52,7 @@
             <img src="/static/img/paypal.png" width="100%" data-toggle="modal" data-target="#payPalModal">
         </div>
     </div>
+    <a href="/checkout">Back to checkout</a>
 
     <div class="modal" id="cardModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -132,7 +137,9 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <img src="/static/img/paypal.png" width="300">
+                    <div class="d-inline">
+                        <img src="/static/img/paypal.png" width="300">
+                    </div>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" role="form" action="\payment" method="post">
