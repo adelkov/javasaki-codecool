@@ -41,16 +41,16 @@ public class ConfirmationController extends HttpServlet {
         OrderDaoMem orderDataStore = OrderDaoMem.getInstance();
         Order order = orderDataStore.find(orderDataStore.getAll().size());
 
-        String name =  order.getName();
-        String email =  order.getEmail();
-        String countryBilling =  order.getCountryBilling();
-        String addressBilling =  order.getAddressBilling();
-        String cityBilling =  order.getCityBilling();
-        int zipBilling =  order.getZipBilling();
-        String countryShipping =  order.getCountryShipping();
-        String addressShipping =  order.getAddressShipping();
-        int zipShipping =  order.getZipShipping();
-        String cityShipping =  order.getCityShipping();
+        String name = order.getName();
+        String email = order.getEmail();
+        String countryBilling = order.getCountryBilling();
+        String addressBilling = order.getAddressBilling();
+        String cityBilling = order.getCityBilling();
+        int zipBilling = order.getZipBilling();
+        String countryShipping = order.getCountryShipping();
+        String addressShipping = order.getAddressShipping();
+        int zipShipping = order.getZipShipping();
+        String cityShipping = order.getCityShipping();
 
         Multiset<Product> list = order.getProducts();
 
@@ -79,12 +79,16 @@ public class ConfirmationController extends HttpServlet {
         String to = email;
         String subject = "Your order";
         String msg = list.toString();
-        send(from, pw, to, subject, msg);
+        try {
+            send(from, pw, to, subject, msg);
+        } catch (RuntimeException e) {
+            System.out.println("Ran out of internet :(");
+        }
 
-
+        resp.sendRedirect("/shop");
     }
 
-    public static void send(String from,String password,String to,String sub,String msg){
+    public static void send(String from, String password, String to, String sub, String msg) {
         //Get properties object
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -97,19 +101,23 @@ public class ConfirmationController extends HttpServlet {
         Session session = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(from,password);
+                        return new PasswordAuthentication(from, password);
                     }
                 });
         //compose message
         try {
             MimeMessage message = new MimeMessage(session);
-            message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
             message.setSubject(sub);
             message.setText(msg);
             //send message
             Transport.send(message);
             System.out.println("message sent successfully");
-        } catch (MessagingException e) {throw new RuntimeException(e);}
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
 
     }
+
+
 }
