@@ -24,6 +24,8 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
+    <script src="/static/js/comparison.js" rel="script"></script>
+
     <!-- Font awesome css -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
           integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
@@ -62,6 +64,10 @@
     </p>
 </a>
 
+<button class="btn btn-ok" style="position:fixed;top:250px;left:5px;margin:0;padding:5px 3px; color:darkred; visibility: hidden;" id="doComparison">
+    Comapre items
+</button>
+
 <div class="container">
     <div class="well well-sm">
         <form action="/" method="POST">
@@ -93,6 +99,9 @@
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
                             <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <input type="checkbox" class="productCompare" th:name="'product_' + ${prod.getId()}" /> Compare
                         </div>
                         <div class="col-xs-12 col-md-6">
                             <a class="btn btn-success" th:href="@{/(idToAdd=${prod.getId()})}">Add to cart</a>

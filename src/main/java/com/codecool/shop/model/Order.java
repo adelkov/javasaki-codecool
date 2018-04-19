@@ -9,40 +9,116 @@ import java.util.List;
 import java.util.Set;
 
 public class Order {
-    private Multiset<Product> cartProducts = HashMultiset.create();
-    private List<Order> orders = new ArrayList<>();
     private int id;
 
-    public Order(){
-        this.id = orders.size() + 1;
-        orders.add(this);
+    private String name;
+    private String email;
+    private String countryBilling;
+    private int zipBilling;
+    private String cityBilling;
+    private String addressBilling;
+
+    private String countryShipping;
+    private int zipShipping;
+    private String cityShipping;
+
+    private Multiset<Product> productSet = HashMultiset.create();
+
+    public Multiset<Product> getProducts() {
+        return productSet;
     }
 
-    public void addOneProduct(Product product){
-        cartProducts.add(product);
+    public void setProducts(Multiset<Product> productSet) {
+        this.productSet = productSet;
     }
 
-    public void removeOneProduct(Product product){
-        cartProducts.remove(product);
+    public int getId() {
+        return id;
     }
 
-    public void removeProduct(Product product){
-        cartProducts.remove(product, cartProducts.count(product));
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getProductCount(Product product){
-        return cartProducts.count(product);
+    public String getName() {
+        return name;
     }
 
-    public String getTotalPrice(){
-        float totalPrice = 0;
-        for (Product product:cartProducts.elementSet()){
-            totalPrice += product.getDefaultPrice() * cartProducts.count(product);
-        }
-        return totalPrice + " USD";
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Set<Product> getProducts(){
-        return cartProducts.elementSet();
+    public String getEmail() {
+        return email;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCountryBilling() {
+        return countryBilling;
+    }
+
+    public void setCountryBilling(String countryBilling) {
+        this.countryBilling = countryBilling;
+    }
+
+    public int getZipBilling() {
+        return zipBilling;
+    }
+
+    public void setZipBilling(int zipBilling) {
+        this.zipBilling = zipBilling;
+    }
+
+    public String getCityBilling() {
+        return cityBilling;
+    }
+
+    public void setCityBilling(String cityBilling) {
+        this.cityBilling = cityBilling;
+    }
+
+    public String getAddressBilling() {
+        return addressBilling;
+    }
+
+    public void setAddressBilling(String addressBilling) {
+        this.addressBilling = addressBilling;
+    }
+
+    public String getCountryShipping() {
+        return countryShipping;
+    }
+
+    public void setCountryShipping(String countryShipping) {
+        this.countryShipping = countryShipping;
+    }
+
+    public int getZipShipping() {
+        return zipShipping;
+    }
+
+    public void setZipShipping(int zipShipping) {
+        this.zipShipping = zipShipping;
+    }
+
+    public String getCityShipping() {
+        return cityShipping;
+    }
+
+    public void setCityShipping(String cityShipping) {
+        this.cityShipping = cityShipping;
+    }
+
+    public String getAddressShipping() {
+        return addressShipping;
+    }
+
+    public void setAddressShipping(String addressShipping) {
+        this.addressShipping = addressShipping;
+    }
+
+    private String addressShipping;
 }
