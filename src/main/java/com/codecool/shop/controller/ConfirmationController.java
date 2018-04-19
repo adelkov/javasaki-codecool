@@ -1,13 +1,15 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.implementation.OrderDaoMem;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
 import com.google.common.collect.Multiset;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
+import java.io.FileWriter;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -35,14 +37,7 @@ public class ConfirmationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String from = "javasaki.webshop@gmail.com";
-        String pw = "Paugcho1969";
-        String to = "barazutti.peter@gmail.com";
-        String subject = "heló";
-        String msg = "Heló.";
-        send(from, pw, to, subject, msg);
-
-        /*HttpSession session = req.getSession();
+        HttpSession session = req.getSession();
         OrderDaoMem orderDataStore = OrderDaoMem.getInstance();
         Order order = orderDataStore.find(1);
 
@@ -51,16 +46,40 @@ public class ConfirmationController extends HttpServlet {
         String countryBilling =  order.getCountryBilling();
         String addressBilling =  order.getAddressBilling();
         String cityBilling =  order.getCityBilling();
-        String zipBilling =  order.getZipBilling();
+        int zipBilling =  order.getZipBilling();
         String countryShipping =  order.getCountryShipping();
         String addressShipping =  order.getAddressShipping();
-        String zipShipping =  order.getZipShipping();
+        int zipShipping =  order.getZipShipping();
         String cityShipping =  order.getCityShipping();
 
         Multiset<Product> list = order.getProducts();
 
-        JSONObject obj = new JSONObject();*/
+        JSONObject orderJSON = new JSONObject();
 
+        orderJSON.put("name", name);
+        orderJSON.put("email", email);
+        orderJSON.put("Billing country", countryBilling);
+        orderJSON.put("Billing address", addressBilling);
+        orderJSON.put("Billing city", cityBilling);
+        orderJSON.put("Billing zip", zipBilling);
+        orderJSON.put("Shipping country", countryShipping);
+        orderJSON.put("Shipping address", addressShipping);
+        orderJSON.put("Shipping zip", zipShipping);
+        orderJSON.put("Shipping city", cityShipping);
+        orderJSON.put("Product list", list);
+
+        try (FileWriter file = new FileWriter("/home/peter/Desktop/order_json.txt")) {
+            file.write(orderJSON.toJSONString());
+            System.out.println("Successfully Copied JSON Object to File...");
+            System.out.println("\nJSON Object: " + orderJSON);
+        }
+
+        String from = "javasaki.webshop@gmail.com";
+        String pw = "Paugcho1969";
+        String to = email;
+        String subject = "Your order";
+        String msg = list.toString();
+        send(from, pw, to, subject, msg);
 
 
     }

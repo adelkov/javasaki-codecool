@@ -1,6 +1,7 @@
 package com.codecool.shop.model;
 
 import java.util.Currency;
+import java.util.HashMap;
 
 public class Product extends BaseModel {
 
@@ -8,6 +9,7 @@ public class Product extends BaseModel {
     private Currency defaultCurrency;
     private ProductCategory productCategory;
     private Supplier supplier;
+    private HashMap<MandatoryAttribute.allAttributes, String> productAttributes = new HashMap<>();
 
 
     public Product(String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
@@ -58,6 +60,20 @@ public class Product extends BaseModel {
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
         this.supplier.addProduct(this);
+    }
+
+    public HashMap<MandatoryAttribute.allAttributes, String> getProductAttributes() {
+        return this.productAttributes;
+    }
+
+    public void setProductAttributes(HashMap<MandatoryAttribute.allAttributes, String> attributes) throws FailedMandatoryKeys {
+        MandatoryAttribute mandatories = this.productCategory.getMandatoryAttributes();
+        for (MandatoryAttribute.allAttributes currAttribute : mandatories.getAttributes()){
+            if (!attributes.containsKey(currAttribute)) {
+                throw new FailedMandatoryKeys();
+            }
+        }
+        this.productAttributes = attributes;
     }
 
     @Override
