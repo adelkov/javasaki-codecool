@@ -24,10 +24,16 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
+    <!-- Font awesome css -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+          integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+
     <!-- Google font css -->
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Permanent+Marker|Rock+Salt" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+
+    <script src="/static/js/cart.js" rel="script"></script>
 </head>
 <body>
 <h1 class="head center-block row">
@@ -52,17 +58,19 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">Product</th>
-                    <th scope="col"></th>
-                    <th scope="col">Unit price</th>
-                    <th scope="col">Items</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
+                    <th scope="col" style="width: 30%;" colspan="2">Product</th>
+                    <th scope="col" style="width: 15%;"></th>
+                    <th scope="col" style="width: 20%;">Unit price</th>
+                    <th scope="col" style="width: 5%;">Items</th>
+                    <th scope="col" style="width: 5%;"></th>
+                    <th scope="col" style="width: 5%;"></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="prod,iterStat : ${cartList.elementSet()}">
+                <tr th:each="prod,iterStat : ${cartList.elementSet()}" class="item_row">
+                    <td><a th:href="@{/cart(idToDelete=${prod.getId()})}" style="font-size:3em; color:Tomato">
+                        <i class="fas fa-times"></i>
+                    </a></td>
                     <td th:text="${prod.getName()}"></td>
                     <td><img class="group list-group-image" width="60" src="http://placehold.it/400x250/000/fff"
                              th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/></td>
@@ -70,16 +78,13 @@
                     <td th:text="${cartList.count(prod)}"></td>
                     <td><a class="btn btn-success" th:href="@{/cart(idToAdd=${prod.getId()})}">+</a></td>
                     <td><a class="btn btn-success" th:href="@{/cart(idToRemove=${prod.getId()})}">-</a></td>
-                    <td><a class="btn btn-success" th:href="@{/cart(idToDelete=${prod.getId()})}">kuka</a></td>
                 </tr>
                 <tr>
-                    <th>Total price:</th>
+                    <th colspan="2">Total price:</th>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td th:text="${total}"></td>
+                    <td th:text="${total}" colspan="2"></td>
                 </tr>
                 </tbody>
             </table>
