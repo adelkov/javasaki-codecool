@@ -28,6 +28,8 @@ public class CompareController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
+        context.setVariable("pageName", "Compare");
+
 
         Product firstProduct = null;
         Product secondProduct = null;
