@@ -25,7 +25,7 @@ $( document ).ready(function() {
                 $.ajax({
                     type: 'POST',
                     data: {'id': item1ID},
-                    url: '/',
+                    url: '/shop',
                     success: function (response) {
                         console.log("Got the data!");
                         prod1NameHTML.innerText = response.name;
@@ -41,7 +41,7 @@ $( document ).ready(function() {
                     $.ajax({
                         type: 'POST',
                         data: {'id': item2ID},
-                        url: '/',
+                        url: '/shop',
                         success: function (response) {
                             console.log("Got the data!");
                             prod2NameHTML.innerText = response.name;
