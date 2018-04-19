@@ -49,6 +49,7 @@ public class CartController extends HttpServlet {
         context.setVariable("cartList", list);
         context.setVariable("total",getSum(list));
         context.setVariable("recipient", "World");
+        context.setVariable("pageName", "Cart");
         context.setVariable("category", productCategoryDataStore.find(1));
         context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
         engine.process("product/cart.html", context, resp.getWriter());

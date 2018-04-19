@@ -58,6 +58,7 @@ public class ProductController extends HttpServlet {
         context.setVariable("recipient", "World");
         context.setVariable("categories", productCategoryDataStore.getAll());
         context.setVariable("suppliers", supplierDataStore.getAll());
+        context.setVariable("pageName", "Motorcycle store");
         if(filterBy.equals("category")){
             context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(filter_id)));
         }else if(filterBy.equals("supplier")){
