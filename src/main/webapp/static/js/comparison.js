@@ -1,4 +1,9 @@
 $( document ).ready(function() {
+    let shownImage = "fas fa-angle-down";
+    let hiddenImage = "fas fa-angle-up";
+    let hideButton = document.getElementById("hide-and-seek");
+    let snapshotHidden = false;
+
     let compareSnapshot = document.getElementById("compare-snapshot");
     let comparisonButton = document.getElementById("compare-button");
     let comparedItems = [];
@@ -93,5 +98,25 @@ $( document ).ready(function() {
 
     comparisonButton.addEventListener("click", function() {
        window.location.replace("/compare?p1ID=" + comparedItems[0].split('_')[1] + '&p2ID=' + comparedItems[1].split('_')[1]);
+    });
+
+    hideButton.addEventListener("click", function() {
+        let itemsDiv = document.getElementById("items");
+        if (snapshotHidden) {
+            itemsDiv.style.visibility = "visible";
+            compareSnapshot.style.top = "70%";
+            comparisonButton.style.visibility = (comparedItems.length === 2) ? "visible" : "hidden";
+            hideButton.classList.add("fa-angle-down");
+            hideButton.classList.remove("fa-angle-up");
+            snapshotHidden = false;
+        } else {
+            itemsDiv.style.visibility = "hidden";
+            compareSnapshot.style.top = "90%";
+            comparisonButton.style.visibility = "hidden";
+            hideButton.classList.remove("fa-angle-down");
+            hideButton.classList.add("fa-angle-up");
+            snapshotHidden = true;
+        }
+
     });
 });
