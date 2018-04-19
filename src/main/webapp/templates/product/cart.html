@@ -38,8 +38,10 @@
 <body>
 <div th:include="header.html :: copy(pageName=${pageName})"></div>
 <div class="container">
-    <div class="row justify-content-sm-center">
-        <div class="item col-xs-4 col-lg-8">
+    <div class="row justify-content-md-center">
+        <div class="col col-lg-2">
+        </div>
+        <div class="col col-lg-8">
             <table class="table">
                 <thead>
                 <tr>
@@ -68,15 +70,15 @@
                     <th colspan="2">Total price:</th>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td th:text="${total}" colspan="2"></td>
+                    <td th:text="${total}" colspan="3"></td>
                 </tr>
                 </tbody>
             </table>
-            <a href="/checkout"><img src="/static/img/checkout.png" width="60" height="60"></a>
-            <a href="/shop">Back to shop</a>
+            <a class="btn btn-info" href="/checkout">Checkout</a>
+            <a href="/shop" class="back-to">Back to shop</a>
         </div>
     </div>
 </div>
 </body>
+
 </html>
