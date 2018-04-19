@@ -69,12 +69,13 @@ $( document ).ready(function() {
                 clearColumn(comparedItems.indexOf(this.name));
                 console.log("Remove from comparison, ID: " + productID);
                 comparedItems.splice(comparedItems.indexOf(this.name), 1);
-
             }
 
             if (comparedItems.length > 0) {
                 compareSnapshot.style.visibility = "visible";
             } else {
+                clearColumn(0);
+                clearColumn(1);
                 compareSnapshot.style.visibility = "hidden";
             }
 
