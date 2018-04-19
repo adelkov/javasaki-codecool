@@ -32,22 +32,7 @@
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Permanent+Marker|Rock+Salt" rel="stylesheet">
 </head>
 <body>
-    <h1 class="head center-block row">
-        <div class="container">
-            <div class="row justify-content-md-center">
-                <div class="col col-md-5">
-                    Javasaki <br>
-                    <p class="sub-title center-block">Motorcycle store</p>
-                </div>
-                <div class="col-md-2">
-
-                </div>
-                <div class="col col-md-3">
-                    <img src="/static/img/large_motorcycle.png" width="400px">
-                </div>
-            </div>
-        </div>
-    </h1>
+    <div th:include="header.html :: copy(pageName=${pageName})"></div>
     <div id="elements" th:with="prod1Attrib=${product1.getProductAttributes()},prod2Attrib=${product2.getProductAttributes()}">
         <table width="80%" align="center" style="text-align: center">
             <thead>
