@@ -13,8 +13,9 @@
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
@@ -28,46 +29,75 @@
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
 </head>
 <body>
-<div class="jumbotron text-center">
-    <h1>Payment</h1>
-</div>
+
+<h1 class="head center-block row">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col col-md-5">
+                Javasaki <br>
+                <p class="sub-title center-block">Motorcycle store</p>
+            </div>
+            <div class="col-md-2">
+
+            </div>
+            <div class="col col-md-3">
+                <img src="/static/img/large_motorcycle.png" width="400px">
+            </div>
+        </div>
+    </div>
+</h1>
 
 <div class="container">
-    <button type="button" data-toggle="modal" data-target="#cardModal">Pay with card</button>
+    <div class="row justify-content-lg-center">
+        <div class="col-lg-12 my-auto">
+            <h1 class="text-center">Please select a payment method:</h1>
+        </div>
+    </div>
+    <div class="row justify-content-lg-center">
+        <div class="col col-lg-2 my-auto">
+            <img src="/static/img/card.png" width="100%" data-toggle="modal" data-target="#cardModal">
+        </div>
+        <div class="col-lg-1 text-center my-auto">
+            <h3>or</h3>
+        </div>
+        <div class="col col-lg-2 my-auto">
+            <img src="/static/img/paypal.png" width="100%" data-toggle="modal" data-target="#payPalModal">
+        </div>
+    </div>
+
     <div class="modal" id="cardModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="d-inline">
-                        <img src="/static/img/card.png"  width="150">
-                    </div>
-                    <div class="d-inline">
-                        <span>Valami</span>
+                        <img src="/static/img/card.png" width="150">
                     </div>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" role="form" action="\payment" method="post">
                         <fieldset>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label" for="card-holder-name">Name on Card</label>
+                                <label class="col control-label" for="card-holder-name">Name on Card</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" name="card-holder-name"
                                            id="card-holder-name" placeholder="Card Holder's Name" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label" for="card-number">Card Number</label>
+                                <label class="col control-label" for="card-number">Card Number</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" name="card-number" id="card-number"
-                                           placeholder="Debit/Credit Card Number" required pattern="[0-9]{16}" maxlength="16">
+                                           placeholder="Debit/Credit Card Number" required pattern="[0-9]{16}"
+                                           maxlength="16">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label" for="expiry-month">Expiration Date</label>
+                                <label class="col control-label" for="expiry-month">Expiration Date</label>
                                 <div class="col-sm-9">
                                     <div class="row">
                                         <div class="col-xs-3">
-                                            <select class="form-control col-sm-2" name="expiry-month" id="expiry-month" required>
+                                            <select class="form-control" name="expiry-month" id="expiry-month"
+                                                    required>
                                                 <option value="1">Jan (01)</option>
                                                 <option value="2">Feb (02)</option>
                                                 <option value="3">Mar (03)</option>
@@ -114,7 +144,6 @@
             </div>
         </div>
     </div>
-    <button type="button" data-toggle="modal" data-target="#payPalModal">Pay with PayPal</button>
     <div class="modal" id="payPalModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
