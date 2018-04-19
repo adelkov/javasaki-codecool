@@ -26,10 +26,17 @@ import java.io.IOException;
 public class ConfirmationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("data", "Ok");
+        OrderDaoMem orderDataStore = OrderDaoMem.getInstance();
+        Order order = orderDataStore.find(orderDataStore.getAll().size());
+
+        context.setVariable("name", order.getName());
+        context.setVariable("email", order.getEmail());
+        context.setVariable("country", order.getCountryBilling());
+        context.setVariable("zip", order.getZipBilling());
+        context.setVariable("city", order.getCityBilling());
+        context.setVariable("address", order.getAddressBilling());
 
         engine.process("product/confirmation.html", context, resp.getWriter());
     }
@@ -37,7 +44,6 @@ public class ConfirmationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession session = req.getSession();
         OrderDaoMem orderDataStore = OrderDaoMem.getInstance();
         Order order = orderDataStore.find(orderDataStore.getAll().size());
 
