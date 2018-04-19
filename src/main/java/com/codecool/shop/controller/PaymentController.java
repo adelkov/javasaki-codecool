@@ -21,19 +21,4 @@ public class PaymentController extends HttpServlet {
         engine.process("payment.html", context, resp.getWriter());
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       if(req.getParameter("cardButton") != null){
-           String cardHolder = req.getParameter("card-holder-name");
-           String cardNumber = req.getParameter("card-number");
-           int cardExpMonth = Integer.parseInt(req.getParameter("expiry-month"));
-           int cardExpYear = Integer.parseInt(req.getParameter("expiry-year"));
-           String cardCVV = req.getParameter("cvv");
-       }else{
-           String payPalUser = req.getParameter("paypal-username");
-           String payPalPassword = req.getParameter("paypal-password");
-       }
-       resp.sendRedirect("/");
-    }
-
 }
