@@ -39,7 +39,7 @@ public class ConfirmationController extends HttpServlet {
 
         HttpSession session = req.getSession();
         OrderDaoMem orderDataStore = OrderDaoMem.getInstance();
-        Order order = orderDataStore.find(1);
+        Order order = orderDataStore.find(orderDataStore.getAll().size());
 
         String name =  order.getName();
         String email =  order.getEmail();
