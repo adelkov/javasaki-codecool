@@ -24,6 +24,8 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
 
+    private Multiset<Product> list = HashMultiset.create();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req, resp, 1 , "category");
@@ -40,19 +42,12 @@ public class ProductController extends HttpServlet {
 //        params.put("category", productCategoryDataStore.find(1));
 //        params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
 
-        // add product to order object's cart multiset
+        session.setAttribute("list",list);
+
         if (req.getParameter("idToAdd") != null) {
             Product productToAdd = productDataStore.find(Integer.parseInt(req.getParameter("idToAdd")));
-
-            Multiset<Product> list= (HashMultiset<Product>) session.getAttribute("list");
-
-            if(list==null){
-                list = HashMultiset.create();
-            }
+            session.getAttribute("list");
             list.add(productToAdd);
-
-            session.setAttribute("list",list);
-
         }
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
