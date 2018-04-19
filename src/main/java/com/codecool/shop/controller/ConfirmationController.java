@@ -37,6 +37,7 @@ public class ConfirmationController extends HttpServlet {
         context.setVariable("zip", order.getZipBilling());
         context.setVariable("city", order.getCityBilling());
         context.setVariable("address", order.getAddressBilling());
+        context.setVariable("pageName", "Confirmation");
 
         engine.process("product/confirmation.html", context, resp.getWriter());
     }
