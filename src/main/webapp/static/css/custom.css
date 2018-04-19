@@ -168,3 +168,59 @@ img {
 #motor-image{
     padding-bottom: 10px;
 }
+
+/********************************/
+/*       Compare snapshot       */
+/********************************/
+
+#compare-snapshot {
+    visibility: hidden;
+    width: 30%;
+    top: 70%;
+    left: 65%;
+    position: fixed;
+    padding: 5px;
+}
+
+#compare-snapshot hr {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+table[id="compared-items"] {
+    width: 80%;
+    float: left;
+}
+
+table[id="compared-items"] tr td {
+    width: 48%;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+#compared-images td img {
+    width: 60%;
+}
+
+div[id="items"] {
+    width: 100%;
+    display: inline;
+}
+
+div[id="compare-navigation"] {
+    width: 15%;
+    float: right;
+}
+
+.fa-chevron-circle-right {
+    color: #e88424;
+    background-color: #252525;
+    border-radius: 20px;
+}
+
+.fa-chevron-circle-right:hover {
+    color: #fe9228;
+    cursor: pointer;
+}
+
+/********************************/
