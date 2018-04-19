@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/"})
+@WebServlet(urlPatterns = {"/shop"})
 public class ProductController extends HttpServlet {
 
     private Multiset<Product> list = HashMultiset.create();

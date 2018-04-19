@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/open"})
+@WebServlet(urlPatterns = {"/"})
 public class OpenController extends HttpServlet {
 
     public static Order order = new Order();
