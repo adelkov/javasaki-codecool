@@ -54,6 +54,7 @@ public class CartController extends HttpServlet {
         engine.process("product/cart.html", context, resp.getWriter());
     }
 
+    @org.jetbrains.annotations.NotNull
     private String getSum(Multiset<Product> list){
         float total = 0;
         for(Product product:list){
