@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Comparison</title>
+</head>
+<body>
+    <h1>Compare elements</h1>
+    <div id="elements" th:with="prod1Attrib=${product1.getProductAttributes()},prod2Attrib=${product2.getProductAttributes()}">
+        <table width="80%" align="center" style="text-align: center">
+            <thead>
+                <tr>
+                    <td width="40%"><h2 th:text="${product1.getName()}">Product1</h2></td>
+                    <td width="20%"></td>
+                    <td width="40%"><h2 th:text="${product2.getName()}">Product2</h2></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <img class="group list-group-image" src="http://placehold.it/400x250/000/fff"
+                             th:attr="src='/static/img/product_' + ${product1.getId()} + '.jpg'" th:alt="${product1.getName()}" width="60%"/>
+                    </td>
+                    <td></td>
+                    <td>
+                        <img class="group list-group-image" src="http://placehold.it/400x250/000/fff"
+                             th:attr="src='/static/img/product_' + ${product2.getId()} + '.jpg'" th:alt="${product2.getName()}" width="60%"/>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td th:text="${product1.getSupplier().getName()}">Product 1 Supplier</td>
+                    <td><b>SUPPLIER</b></td>
+                    <td th:text="${product2.getSupplier().getName()}">Product 2 Supplier</td>
+                </tr>
+                <tr>
+                    <td th:text="${product1.getDescription()}">Product 1 Description</td>
+                    <td><b>DESCRIPTION</b></td>
+                    <td th:text="${product2.getDescription()}">Product 2 Description</td>
+                </tr>
+                <tr>
+                    <td th:text="${product1.getDefaultPrice() + ' ' + product1.getDefaultCurrency().toString()}"></td>
+                    <td><b>PRICE</b></td>
+                    <td th:text="${product2.getDefaultPrice() + ' ' + product2.getDefaultCurrency().toString()}"></td>
+                </tr>
+                <tr th:each="attrib: ${prod1Attrib.keySet()}">
+                    <td th:text="${prod1Attrib.get(attrib)}">No data</td>
+                    <td><b th:text="${attrib}"></b></td>
+                    <td th:text="${prod2Attrib.get(attrib)}">No data</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <a href="/">Back to shop</a>
+</body>
+</html>

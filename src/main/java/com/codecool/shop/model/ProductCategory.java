@@ -6,6 +6,7 @@ import java.util.List;
 public class ProductCategory extends BaseModel {
     private String department;
     private List<Product> products;
+    private MandatoryAttribute mandatoryAttribute;
 
     public ProductCategory(String name, String department, String description) {
         super(name);
@@ -31,6 +32,14 @@ public class ProductCategory extends BaseModel {
 
     public void addProduct(Product product) {
         this.products.add(product);
+    }
+
+    public MandatoryAttribute getMandatoryAttributes() {
+        return this.mandatoryAttribute;
+    }
+
+    public void setMandatoryAttribute(MandatoryAttribute mandatory) {
+        this.mandatoryAttribute = mandatory;
     }
 
     public String toString() {
