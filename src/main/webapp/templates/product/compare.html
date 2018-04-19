@@ -60,12 +60,12 @@
                 <tr>
                     <td>
                         <img class="group list-group-image" src="http://placehold.it/400x250/000/fff"
-                             th:attr="src='/static/img/product_' + ${product1.getId()} + '.jpg'" th:alt="${product1.getName()}" width="60%"/>
+                             th:attr="src='/static/img/product_' + ${product1.getId()} + '.jpg'" th:alt="${product1.getName()}" width="40%"/>
                     </td>
                     <td></td>
                     <td>
                         <img class="group list-group-image" src="http://placehold.it/400x250/000/fff"
-                             th:attr="src='/static/img/product_' + ${product2.getId()} + '.jpg'" th:alt="${product2.getName()}" width="60%"/>
+                             th:attr="src='/static/img/product_' + ${product2.getId()} + '.jpg'" th:alt="${product2.getName()}" width="40%"/>
                     </td>
                 </tr>
             </thead>
@@ -93,6 +93,8 @@
             </tbody>
         </table>
     </div>
-    <a href="/">Back to shop</a>
+    <a href="/" class="back-to">Back to shop</a>
+
+    <div th:replace="footer.html :: copy"></div>
 </body>
 </html>
