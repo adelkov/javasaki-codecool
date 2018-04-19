@@ -1,7 +1,60 @@
 $( document ).ready(function() {
-    let comparisonButton = document.getElementById("doComparison");
+    let compareSnapshot = document.getElementById("compare-snapshot");
+    let comparisonButton = document.getElementById("compare-button");
     let comparedItems = [];
     let checkboxes = document.getElementsByClassName("productCompare");
+
+    function fillCompareSnapshot(items) {
+        if (items.length > 0) {
+
+            let prod1NameHTML = document.getElementById("prod-1-name");
+            let prod1ImgHTML = document.getElementById("prod-1-img");
+            let prod1SuppHTML = document.getElementById("prod-1-supp");
+
+            let prod2NameHTML = document.getElementById("prod-2-name");
+            let prod2ImgHTML = document.getElementById("prod-2-img");
+            let prod2SuppHTML = document.getElementById("prod-2-supp");
+
+            let item1ID = items[0].split('_')[1];
+            if (item1ID != null) {
+                $.ajax({
+                    type: 'POST',
+                    data: {'id': item1ID},
+                    url: '/',
+                    success: function (response) {
+                        console.log("Got the data!");
+                        prod1NameHTML.innerText = response.name;
+                        prod1SuppHTML.innerText = response.supplier;
+                        prod1ImgHTML.setAttribute('src', '/static/img/product_' + item1ID + '.jpg');
+                    }
+                });
+            }
+
+            if (items.length > 1) {
+                let item2ID = items[1].split('_')[1];
+                if (item2ID != null) {
+                    $.ajax({
+                        type: 'POST',
+                        data: {'id': item2ID},
+                        url: '/',
+                        success: function (response) {
+                            console.log("Got the data!");
+                            prod2NameHTML.innerText = response.name;
+                            prod2SuppHTML.innerText = response.supplier;
+                            prod2ImgHTML.setAttribute('src', '/static/img/product_' + item2ID + '.jpg');
+                        }
+                    });
+                }
+            }
+        }
+    }
+
+    function clearColumn(columnID) {
+        document.getElementById("prod-"+ (columnID + 1) +"-name").innerText = "";
+        document.getElementById("prod-"+ (columnID + 1) +"-img").setAttribute('src', '');
+        document.getElementById("prod-"+ (columnID + 1) +"-supp").innerText = "";
+    }
+
     for (let chBox of checkboxes) {
         chBox.checked = false;
         chBox.addEventListener("change", function() {
@@ -11,9 +64,18 @@ $( document ).ready(function() {
             if (this.checked) {
                 console.log("Add to comparison, ID: " + productID);
                 comparedItems.push(this.name);
+                fillCompareSnapshot(comparedItems);
             } else {
+                clearColumn(comparedItems.indexOf(this.name));
                 console.log("Remove from comparison, ID: " + productID);
                 comparedItems.splice(comparedItems.indexOf(this.name), 1);
+
+            }
+
+            if (comparedItems.length > 0) {
+                compareSnapshot.style.visibility = "visible";
+            } else {
+                compareSnapshot.style.visibility = "hidden";
             }
 
             if (comparedItems.length > 2) {
