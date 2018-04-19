@@ -1,9 +1,9 @@
 $(document).ready(function () {
-    var cartButton = document.getElementById("shopping-cart");
+    var cartLabel = document.getElementById("cartLabel");
 
-    if (sessionStorage.getItem("cartList")) {
-        cartButton.style.visibility = "visible";
+    if (cartLabel.getAttribute("data") === "0") {
+        cartLabel.style.visibility = "hidden";
     } else {
-        cartButton.style.visibility = "hidden";
+        cartLabel.style.visibility = "visible";
     }
 });
