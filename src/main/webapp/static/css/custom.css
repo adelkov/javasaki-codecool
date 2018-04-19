@@ -126,7 +126,9 @@
 .btn:hover {
     background: #fe9228;
     border-color: #fe9228;
+    font-weight: bolder;
 }
+
 
 .thumbnail{
     border-radius: 8px;
@@ -168,6 +170,17 @@ img {
 #motor-image{
     padding-bottom: 10px;
 }
+
+.back-to {
+    text-decoration: none;
+}
+
+.back-to:hover {
+    color:#fe9228;
+    text-decoration: none;
+}
+
+
 
 /********************************/
 /*       Compare snapshot       */
