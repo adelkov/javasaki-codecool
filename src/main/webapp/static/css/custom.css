@@ -187,6 +187,25 @@ img {
     margin-bottom: 3px;
 }
 
+#compare-header {
+    display: inline;
+}
+
+#compare-header h4 {
+    width: 80%;
+    float: left;
+}
+
+#hide-and-seek {
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+#hide-and-seek:hover {
+    cursor: pointer;
+}
+
 table[id="compared-items"] {
     width: 80%;
     float: left;
@@ -208,6 +227,7 @@ div[id="items"] {
 }
 
 div[id="compare-navigation"] {
+    margin-top: 50px;
     width: 15%;
     float: right;
 }
