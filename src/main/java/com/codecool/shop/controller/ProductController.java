@@ -28,7 +28,7 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp, 1 , "category");
+        doGet(req, resp, 1 , "all");
 
     }
 
@@ -63,6 +63,8 @@ public class ProductController extends HttpServlet {
             context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(filter_id)));
         }else if(filterBy.equals("supplier")){
             context.setVariable("products", productDataStore.getBy(supplierDataStore.find(filter_id)));
+        }else{
+            context.setVariable("products",productDataStore.getAll());
         }
 
 
