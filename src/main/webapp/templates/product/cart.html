@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>Shopping cart</title>
+
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <!-- Font awesome css -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+          integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+
+    <!-- Google font css -->
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Permanent+Marker|Rock+Salt" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+
+    <script src="/static/js/cart.js" rel="script"></script>
+</head>
+<body>
+<div th:include="header.html :: copy(pageName=${pageName})"></div>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col col-lg-2">
+        </div>
+        <div class="col col-lg-8">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col" style="width: 30%;" colspan="2">Product</th>
+                    <th scope="col" style="width: 15%;"></th>
+                    <th scope="col" style="width: 20%;">Unit price</th>
+                    <th scope="col" style="width: 5%;">Items</th>
+                    <th scope="col" style="width: 5%;"></th>
+                    <th scope="col" style="width: 5%;"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="prod,iterStat : ${cartList.elementSet()}" class="item_row">
+                    <td><a th:href="@{/cart(idToDelete=${prod.getId()})}" style="font-size:3em; color:Tomato">
+                        <i class="fas fa-times"></i>
+                    </a></td>
+                    <td th:text="${prod.getName()}"></td>
+                    <td><img class="group list-group-image" width="60" src="http://placehold.it/400x250/000/fff"
+                             th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/></td>
+                    <td th:text="${prod.getPrice()}"></td>
+                    <td th:text="${cartList.count(prod)}"></td>
+                    <td><a class="btn btn-success" th:href="@{/cart(idToAdd=${prod.getId()})}">+</a></td>
+                    <td><a class="btn btn-success" th:href="@{/cart(idToRemove=${prod.getId()})}">-</a></td>
+                </tr>
+                <tr>
+                    <th colspan="2">Total price:</th>
+                    <td></td>
+                    <td></td>
+                    <td th:text="${total}" colspan="3"></td>
+                </tr>
+                </tbody>
+            </table>
+            <a class="btn btn-info" href="/checkout">Checkout</a>
+            <a href="/shop" class="back-to">Back to shop</a>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

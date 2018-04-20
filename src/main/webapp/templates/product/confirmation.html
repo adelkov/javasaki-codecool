@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>Codecool Shop</title>
+
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <!-- Font awesome css -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+          integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+
+    <!-- Google font css -->
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Permanent+Marker|Rock+Salt" rel="stylesheet">
+</head>
+
+<body>
+
+<div th:include="header.html :: copy(pageName=${pageName})"></div>
+<div>
+    <dl class="dl-horizontal">
+        <dt>Name</dt>
+        <dd th:text="${name}">Name</dd>
+        <dt>Email</dt>
+        <dd th:text="${email}">Email</dd>
+        <dt>Country</dt>
+        <dd th:text="${country}">Country</dd>
+        <dt>Zip code</dt>
+        <dd th:text="${zip}">Zip</dd>
+        <dt>City</dt>
+        <dd th:text="${city}">City</dd>
+        <dt>Address</dt>
+        <dd th:text="${address}">Address</dd>
+        <dt style="margin-top: 20px">
+            <form action="/confirmation" method="post">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </dt><dd></dd>
+    </dl>
+</div>
+
+
+<div th:replace="footer.html :: copy"></div>
+
+</body>
+</html>

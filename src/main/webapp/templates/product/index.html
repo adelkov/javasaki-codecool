@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
-    <meta name="author" content="Codecool" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <title>Codecool Shop</title>
 
@@ -13,55 +13,121 @@
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+    <script src="/static/js/comparison.js" rel="script"></script>
+    <script src="/static/js/index.js" rel="script"></script>
+
+    <!-- Font awesome css -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+          integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+
+    <!-- Google font css -->
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Permanent+Marker|Rock+Salt" rel="stylesheet">
 </head>
 
 <body>
 
-<div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
-</div>
+
+<div th:include="header.html :: copy(pageName=${pageName})"></div>
+
+<a id="shopping-cart" href="/cart">
+    <i class="fas fa-shopping-cart fa-3x" style="color: white"></i>
+    <br>
+    <p class="nr_of_items_in_cart" id="cartLabel" th:text="${cartSize+' items'}"
+        th:data="${cartSize}"
+        >
+    </p>
+</a>
 
 <div class="container">
     <div class="well well-sm">
-        <strong th:text="${category.name}">Category Title</strong>
+        <form action="/shop" method="POST">
+            <select name="filter_category" onchange="this.form.submit()">
+                <option value="" selected>Choose category</option>
+                <option th:each="category: ${categories}" th:value="${category.getId()}"
+                        th:text="${category.getName()}">
+                </option>
+            </select>
+            <select name="filter_supplier" onchange="this.form.submit()">
+                <option value="" selected>Choose supplier</option>
+                <option th:each="supplier: ${suppliers}" th:value="${supplier.getId()}"
+                        th:text="${supplier.getName()}">
+                </option>
+            </select>
+        </form>
     </div>
 
     <div id="products" class="row list-group">
-
         <div class="item col-xs-4 col-lg-4" th:each="prod,iterStat : ${products}">
             <div class="thumbnail">
-                <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
+                <img class="group list-group-image" src="http://placehold.it/400x250/000/fff"
+                     th:attr="src='/static/img/product_' + ${prod.getId()} + '.jpg'" th:alt="${prod.getName()}"
+                     width="60%"/>
                 <div class="caption">
                     <h4 class="group inner list-group-item-heading" th:text="${prod.name}">Product name</h4>
-                    <p class="group inner list-group-item-text" th:text="${prod.description}">Product description... </p>
+                    <p class="group inner list-group-item-text" th:text="${prod.description}">Product
+                        description... </p>
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
                             <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <a class="btn btn-success" href="#">Add to cart</a>
+                            <input type="checkbox" class="productCompare" th:name="'product_' + ${prod.getId()}" /> Compare
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <a class="btn btn-success" th:href="@{/shop(idToAdd=${prod.getId()})}">Add to cart</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 
 <div th:replace="footer.html :: copy"></div>
+
+<div id="compare-snapshot" class="thumbnail">
+    <div id="compare-header">
+        <h4>Selected items:</h4>
+        <i class="fas fa-angle-down fa-2x" id="hide-and-seek"></i>
+    </div>
+    <hr />
+    <div id="items">
+        <table id="compared-items">
+            <thead>
+                <tr>
+                    <td id="prod-1-name"></td>
+                    <td id="prod-2-name"></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="compared-images">
+                    <td><img id="prod-1-img" src="" /></td>
+                    <td><img id="prod-2-img" src="" /></td>
+                </tr>
+                <tr>
+                    <td id="prod-1-supp"></td>
+                    <td id="prod-2-supp"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="compare-navigation">
+            <i class="fas fa-chevron-circle-right fa-2x" id="compare-button"></i>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
