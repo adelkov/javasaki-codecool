@@ -9,6 +9,7 @@ import org.json.simple.JSONObject;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.util.Properties;
 import javax.mail.*;
@@ -74,7 +75,10 @@ public class ConfirmationController extends HttpServlet {
         orderJSON.put("Shipping city", cityShipping);
         orderJSON.put("Product list", list);
 
-        try (FileWriter file = new FileWriter("/home/peter/Desktop/order_json.txt")) {
+        String path = System.getProperty("user.dir") + "/order_json.txt";
+        File jsonFile = new File(path);
+
+        try (FileWriter file = new FileWriter(path)) {
             file.write(orderJSON.toJSONString());
             System.out.println("Successfully Copied JSON Object to File...");
             System.out.println("\nJSON Object: " + orderJSON);
