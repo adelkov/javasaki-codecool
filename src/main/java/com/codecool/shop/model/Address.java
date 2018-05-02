@@ -8,9 +8,9 @@ public class Address {
     }
 
     private int id;
+    private int userID;
     private addressType adType;
     private String name;
-    private String email;
     private String country;
     private int zip;
     private String city;
@@ -34,20 +34,20 @@ public class Address {
 
     public void setId(int id) { this.id = id; }
 
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getCountry() {
