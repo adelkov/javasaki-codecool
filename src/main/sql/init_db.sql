@@ -16,14 +16,14 @@ CREATE UNIQUE INDEX IF NOT EXISTS users_hash_password_uindex
 
 CREATE TABLE IF NOT EXISTS addresses
 (
-  id       SERIAL      NOT NULL
-    CONSTRAINT user_id
-    REFERENCES users,
-  user_id  INTEGER     NOT NULL,
-  city     VARCHAR(14) NOT NULL,
-  zip_code INTEGER     NOT NULL,
-  address  VARCHAR(60) NOT NULL,
-  country  VARCHAR(20)
+  id       serial      not null,
+  user_id  integer     not null
+  constraint user_id
+  references users,
+  city     varchar(14) not null,
+  zip_code integer     not null,
+  address  varchar(60) not null,
+  country  varchar(20)
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS addresses_id_uindex
