@@ -5,6 +5,7 @@ import com.codecool.shop.model.Supplier;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -24,7 +25,21 @@ public class SupplierDaoJdbc implements SupplierDao{
 
     @Override
     public Supplier find(int id) {
-        return null;
+        Supplier supplier = null;
+        Connection connection = DBConnector.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM suppliers WHERE id = ?");
+            statement.setInt(1,id);
+            ResultSet result = statement.executeQuery();
+            if(result.next()){
+                String supplierName = result.getString("name");
+                String supplierDesc = result.getString("description");
+                supplier = new Supplier(supplierName,supplierDesc);
+            }
+        }catch (SQLException ex){
+            System.out.println(ex);
+        }
+        return supplier;
     }
 
     @Override
