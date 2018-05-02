@@ -24,7 +24,7 @@ public class DBConnector {
                 DB_PASSWORD);
     }
 
-    public void executeTestQuery(String query, String... params) {
+    public void executeQuery(String query, String... params) {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)
         ){
@@ -39,7 +39,7 @@ public class DBConnector {
         }
     }
 
-    public ResultSet selectQuery(String query,String... params){
+    public ResultSet executeSelectQuery(String query,String... params){
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)
         ){
@@ -49,22 +49,6 @@ public class DBConnector {
                 statement.setString(idx++, param);
             }
             return statement.executeQuery();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private PreparedStatement setStatement(String query, String[] params){
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)
-        ){
-            int idx = 1;
-            for (String param : params)
-            {
-                statement.setString(idx++, param);
-            }
-            return statement;
         } catch (SQLException e) {
             e.printStackTrace();
         }
