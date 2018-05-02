@@ -1,5 +1,6 @@
 package com.codecool.shop.dao.implementation;
 
+import com.codecool.shop.dao.AddressDao;
 import com.codecool.shop.model.Address;
 
 import java.util.List;
