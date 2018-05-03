@@ -16,14 +16,14 @@ CREATE UNIQUE INDEX IF NOT EXISTS users_hash_password_uindex
 
 CREATE TABLE IF NOT EXISTS addresses
 (
-  id       SERIAL      NOT NULL
-    CONSTRAINT user_id
-    REFERENCES users,
-  user_id  INTEGER     NOT NULL,
-  city     VARCHAR(14) NOT NULL,
-  zip_code INTEGER     NOT NULL,
-  address  VARCHAR(60) NOT NULL,
-  country  VARCHAR(20)
+  id       serial      not null,
+  user_id  integer     not null
+  constraint user_id
+  references users,
+  city     varchar(14) not null,
+  zip_code integer     not null,
+  address  varchar(60) not null,
+  country  varchar(20)
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS addresses_id_uindex
@@ -31,16 +31,16 @@ CREATE UNIQUE INDEX IF NOT EXISTS addresses_id_uindex
 
 CREATE TABLE IF NOT EXISTS orders
 (
-  id                 SERIAL  NOT NULL
-    CONSTRAINT billing_address_id
-    REFERENCES addresses (id)
-    CONSTRAINT shipping_address_id
-    REFERENCES addresses (id)
+  id                 SERIAL  NOT NULL,
+  user_id            INTEGER NOT NULL
     CONSTRAINT user_id
     REFERENCES users,
-  user_id            INTEGER NOT NULL,
-  shipping_adress_id INTEGER NOT NULL,
-  billing_address_id INTEGER NOT NULL,
+  shipping_adress_id INTEGER NOT NULL
+    CONSTRAINT shipping_address_id
+    REFERENCES addresses (id),
+  billing_address_id INTEGER NOT NULL
+    CONSTRAINT billing_address_id
+    REFERENCES addresses (id),
   status             VARCHAR(10)
 );
 
@@ -76,16 +76,16 @@ CREATE TABLE IF NOT EXISTS products
 (
   id                  SERIAL           NOT NULL
     CONSTRAINT products_pkey
-    PRIMARY KEY
-    CONSTRAINT product_category_id
-    REFERENCES product_categories
-    CONSTRAINT supplier_id
-    REFERENCES suppliers,
+    PRIMARY KEY,
   name                VARCHAR(12)      NOT NULL,
   default_price       DOUBLE PRECISION NOT NULL,
   default_currency    VARCHAR(3),
-  product_category_id INTEGER,
+  product_category_id INTEGER
+    CONSTRAINT product_category_id
+    REFERENCES product_categories,
   supplier_id         INTEGER          NOT NULL
+    CONSTRAINT supplier_id
+    REFERENCES suppliers
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS products_id_uindex
