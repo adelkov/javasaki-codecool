@@ -111,11 +111,41 @@ public class ProductDaoJdbc implements ProductDao {
 
     @Override
     public List<Product> getBy(Supplier supplier) {
-        return null;
+        List<Product> productList = new ArrayList<>();
+        try (Connection connection = DBConnector.getConnection()) {
+            PreparedStatement stmnt = connection.prepareStatement(
+                    "SELECT * FROM products WHERE supplier_id = ?;"
+            );
+            stmnt.setInt(1, supplier.getId());
+            ResultSet rs = stmnt.executeQuery();
+
+            while (rs.next()){
+                Product product = getProduct(rs);
+                productList.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return productList;
     }
 
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
-        return null;
+        List<Product> productList = new ArrayList<>();
+        try (Connection connection = DBConnector.getConnection()) {
+            PreparedStatement stmnt = connection.prepareStatement(
+                    "SELECT * FROM products WHERE product_category_id = ?;"
+            );
+            stmnt.setInt(1, productCategory.getId());
+            ResultSet rs = stmnt.executeQuery();
+
+            while (rs.next()){
+                Product product = getProduct(rs);
+                productList.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return productList;
     }
 }
