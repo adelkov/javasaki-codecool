@@ -94,6 +94,27 @@ public class AddressDaoJdbc {
         return rows;
     }
 
+    public List<Address> getAddressesByUserID(int userID) {
+        List<Address> rows = new ArrayList<>();
+
+        try(Connection connection = DBConnector.getConnection()) {
+            PreparedStatement stmnt = connection.prepareStatement(
+                    "SELECT * FROM addresses WHERE user_id = ?;"
+            );
+            ResultSet rs = stmnt.executeQuery();
+
+            while (rs.next()) {
+                Address newAddress = getAddress(rs);
+                rows.add(newAddress);
+            }
+            stmnt.setInt(1, userID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return rows;
+    }
+
     @NotNull
     private Address getAddress(ResultSet rs) throws SQLException {
         Address newAddress = Address.getShippingAddress(); // TODO: We might want to check its type
