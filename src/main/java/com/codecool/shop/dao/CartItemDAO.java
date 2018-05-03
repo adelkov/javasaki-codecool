@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface CartItemDAO {
 
-    void add(Product item);
-    void remove(Product item);
+    void add(Product item, int orderId);
+    void remove(Product item, int orderId);
 
     List<Product> getAllByOrder(Integer orderId);
 }
