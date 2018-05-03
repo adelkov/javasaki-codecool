@@ -31,16 +31,16 @@ CREATE UNIQUE INDEX IF NOT EXISTS addresses_id_uindex
 
 CREATE TABLE IF NOT EXISTS orders
 (
-  id                 SERIAL  NOT NULL
-    CONSTRAINT billing_address_id
-    REFERENCES addresses (id)
-    CONSTRAINT shipping_address_id
-    REFERENCES addresses (id)
+  id                 SERIAL  NOT NULL,
+  user_id            INTEGER NOT NULL
     CONSTRAINT user_id
     REFERENCES users,
-  user_id            INTEGER NOT NULL,
-  shipping_adress_id INTEGER NOT NULL,
-  billing_address_id INTEGER NOT NULL,
+  shipping_adress_id INTEGER NOT NULL
+    CONSTRAINT shipping_address_id
+    REFERENCES addresses (id),
+  billing_address_id INTEGER NOT NULL
+    CONSTRAINT billing_address_id
+    REFERENCES addresses (id),
   status             VARCHAR(10)
 );
 
@@ -76,16 +76,16 @@ CREATE TABLE IF NOT EXISTS products
 (
   id                  SERIAL           NOT NULL
     CONSTRAINT products_pkey
-    PRIMARY KEY
-    CONSTRAINT product_category_id
-    REFERENCES product_categories
-    CONSTRAINT supplier_id
-    REFERENCES suppliers,
+    PRIMARY KEY,
   name                VARCHAR(12)      NOT NULL,
   default_price       DOUBLE PRECISION NOT NULL,
   default_currency    VARCHAR(3),
-  product_category_id INTEGER,
+  product_category_id INTEGER
+    CONSTRAINT product_category_id
+    REFERENCES product_categories,
   supplier_id         INTEGER          NOT NULL
+    CONSTRAINT supplier_id
+    REFERENCES suppliers
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS products_id_uindex
