@@ -1,6 +1,7 @@
 package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Address;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
@@ -10,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDaoJdbc implements ProductDao {
@@ -48,40 +50,63 @@ public class ProductDaoJdbc implements ProductDao {
 
     @Override
     public Product find(int id) {
-       /* Product row = null;
-        try(Connection connection = DBConnector.getConnection()) {
+        Product row = null;
+        try (Connection connection = DBConnector.getConnection()) {
             PreparedStatement stmnt = connection.prepareStatement(
                     "SELECT * FROM products WHERE id = ?;"
             );
             stmnt.setInt(1, id);
             ResultSet rs = stmnt.executeQuery();
 
-            while (rs.next()) {
-                row = getProduct(rs);
+            row = getProduct(rs);
 
-            }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return row;*/
-       return null;
+        return row;
     }
 
-/*    private Product getProduct(ResultSet rs) throws SQLException {
+    private Product getProduct(ResultSet rs) throws SQLException {
+        ProductCategoryDaoMemJdbc pc = ProductCategoryDaoMemJdbc.getInstance();
+        SupplierDaoJdbc sup = SupplierDaoJdbc.getInstance();
         Product newProduct = new Product(
-                rs.getString("name"), rs.getFloat("default_price"), rs.getString("default_currency"),"none", rs.getInt(" ")
+                rs.getString("name"), rs.getFloat("default_price"), rs.getString("default_currency"),
+                "none", pc.find(rs.getInt("product_category_id")), sup.find(rs.getInt("supplier_id"))
         );
-    }*/
+        return newProduct;
+    }
 
     @Override
     public void remove(int id) {
-
+        try (Connection connection = DBConnector.getConnection()) {
+            PreparedStatement stmnt = connection.prepareStatement(
+                    "DELETE FROM products WHERE id = ?;"
+            );
+            stmnt.setInt(1, id);
+            stmnt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public List<Product> getAll() {
-        return null;
+        List<Product> allProduct = new ArrayList<>();
+        try (Connection connection = DBConnector.getConnection()) {
+            PreparedStatement stmnt = connection.prepareStatement(
+                    "SELECT * FROM products;"
+            );
+            ResultSet rs = stmnt.executeQuery();
+
+            while (rs.next()){
+                Product product = getProduct(rs);
+                allProduct.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allProduct;
     }
 
     @Override
