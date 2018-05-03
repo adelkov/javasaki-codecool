@@ -101,13 +101,13 @@ public class AddressDaoJdbc {
             PreparedStatement stmnt = connection.prepareStatement(
                     "SELECT * FROM addresses WHERE user_id = ?;"
             );
+            stmnt.setInt(1, userID);
             ResultSet rs = stmnt.executeQuery();
 
             while (rs.next()) {
                 Address newAddress = getAddress(rs);
                 rows.add(newAddress);
             }
-            stmnt.setInt(1, userID);
         } catch (SQLException e) {
             e.printStackTrace();
         }
