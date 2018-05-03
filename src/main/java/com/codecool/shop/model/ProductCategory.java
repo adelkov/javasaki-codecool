@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductCategory extends BaseModel {
+    private int id;
     private String department;
     private List<Product> products;
     private MandatoryAttribute mandatoryAttribute;
@@ -12,6 +13,17 @@ public class ProductCategory extends BaseModel {
         super(name);
         this.department = department;
         this.products = new ArrayList<>();
+        this.description = description;
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDepartment() {
