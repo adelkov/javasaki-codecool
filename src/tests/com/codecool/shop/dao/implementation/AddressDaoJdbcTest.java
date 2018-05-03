@@ -79,4 +79,28 @@ class AddressDaoJdbcTest {
                 () -> assertEquals(addressList.get(addressList.size() - 1).getId(), addresses.find(lastID).getId())
         );
     }
+
+    @Test
+    void testGetAddressByUserID() {
+        AddressDaoJdbc addresses = AddressDaoJdbc.getInstance();
+        Address shipAdd = Address.getShippingAddress();
+        shipAdd.setCity("Budapest");
+        shipAdd.setAddress("Nagymező St.");
+
+        addresses.add(1, shipAdd);
+        List<Address> addressList = addresses.getAll();
+        int newID = addressList.get(addressList.size() - 1).getId();
+
+        List<Address> filteredRows = addresses.getAddressesByUserID(1);
+
+        boolean correctRows = true;
+        int i = 0;
+        while (i < filteredRows.size() && correctRows) {
+            if (filteredRows.get(i++).getUserID() != 1) correctRows = false;
+        }
+
+        assertTrue(correctRows);
+
+        addresses.remove(newID);
+    }
 }
