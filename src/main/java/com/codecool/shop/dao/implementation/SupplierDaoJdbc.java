@@ -18,8 +18,8 @@ public class SupplierDaoJdbc implements SupplierDao{
             statement.setString(1,supplier.getName());
             statement.setString(2,supplier.getDescription());
             statement.execute();
-        }catch (SQLException ex){
-            System.out.println(ex);
+        }catch (SQLException e){
+            e.printStackTrace();
         }
     }
 
@@ -36,14 +36,22 @@ public class SupplierDaoJdbc implements SupplierDao{
                 String supplierDesc = result.getString("description");
                 supplier = new Supplier(supplierName,supplierDesc);
             }
-        }catch (SQLException ex){
-            System.out.println(ex);
+        }catch (SQLException e){
+            e.printStackTrace();
         }
         return supplier;
     }
 
     @Override
     public void remove(int id) {
+        Connection connection = DBConnector.getConnection();
+        try{
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM suppliers WHERE id = ?");
+            statement.setInt(1,id);
+            statement.execute();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
 
     }
 
