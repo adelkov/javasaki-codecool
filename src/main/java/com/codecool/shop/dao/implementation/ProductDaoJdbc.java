@@ -68,13 +68,14 @@ public class ProductDaoJdbc implements ProductDao {
     }
 
     private Product getProduct(ResultSet rs) throws SQLException {
-        ProductCategoryDaoMemJdbc pc = ProductCategoryDaoMemJdbc.getInstance();
+     /*   ProductCategoryDaoMemJdbc pc = ProductCategoryDaoMemJdbc.getInstance();
         SupplierDaoJdbc sup = SupplierDaoJdbc.getInstance();
         Product newProduct = new Product(
                 rs.getString("name"), rs.getFloat("default_price"), rs.getString("default_currency"),
                 "none", pc.find(rs.getInt("product_category_id")), sup.find(rs.getInt("supplier_id"))
         );
-        return newProduct;
+        return newProduct;*/
+        return null;
     }
 
     @Override
@@ -99,7 +100,7 @@ public class ProductDaoJdbc implements ProductDao {
             );
             ResultSet rs = stmnt.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 Product product = getProduct(rs);
                 allProduct.add(product);
             }
@@ -119,7 +120,7 @@ public class ProductDaoJdbc implements ProductDao {
             stmnt.setInt(1, supplier.getId());
             ResultSet rs = stmnt.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 Product product = getProduct(rs);
                 productList.add(product);
             }
@@ -139,7 +140,7 @@ public class ProductDaoJdbc implements ProductDao {
             stmnt.setInt(1, productCategory.getId());
             ResultSet rs = stmnt.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 Product product = getProduct(rs);
                 productList.add(product);
             }
