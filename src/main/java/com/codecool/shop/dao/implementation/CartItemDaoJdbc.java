@@ -14,6 +14,15 @@ import java.util.Map;
 
 public class CartItemDaoJdbc implements CartItemDAO {
 
+    private static CartItemDaoJdbc instance = null;
+
+    public static CartItemDaoJdbc getInstance() {
+        if (instance == null) {
+            instance = new CartItemDaoJdbc();
+        }
+        return instance;
+    }
+
     @Override
     public void add(Product item, int orderId) {
         orderId = 1;
