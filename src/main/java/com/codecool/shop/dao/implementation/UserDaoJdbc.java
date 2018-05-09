@@ -12,8 +12,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * @author Adél Kovács kovacsadel12@gmail.com
+ * @version 1.0
+ * @since 1.0
+ */
 public class UserDaoJdbc implements UserDao {
 
+    /**
+     * Add user to javasaki_shop database users table
+     * @param user: User object to be added
+     */
     @Override
     public void add(User user) {
         try (Connection connection = DBConnector.getConnection();) {
@@ -31,6 +41,11 @@ public class UserDaoJdbc implements UserDao {
         }
     }
 
+    /**
+     * Find a user in javasaki_shop database users table by its ID
+     * @param  id: unique identification of user
+     * @return User object if found, null if not found
+     */
     @Override
     public User find(int id) {
         try (Connection connection = DBConnector.getConnection()) {
@@ -47,6 +62,10 @@ public class UserDaoJdbc implements UserDao {
         return null;
     }
 
+    /**
+     * Removes a user from database by its ID
+     * @param  id: unique identification of user
+     */
     @Override
     public void remove(int id) {
         try (Connection connection = DBConnector.getConnection()) {
