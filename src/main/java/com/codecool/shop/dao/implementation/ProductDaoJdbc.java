@@ -6,6 +6,8 @@ import com.codecool.shop.model.Address;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDaoJdbc implements ProductDao {
+
+    final Logger logger = LoggerFactory.getLogger(ProductDaoJdbc.class);
 
     private static ProductDaoJdbc instance = null;
 
@@ -41,8 +45,8 @@ public class ProductDaoJdbc implements ProductDao {
             stmnt.setString(3, product.getDefaultCurrency().toString());
             stmnt.setInt(4, product.getId());
             stmnt.setInt(5, product.getSupplier().getId());
-
             stmnt.executeUpdate();
+            logger.trace("Product with ID {} added to DB", product.getId());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -57,8 +61,8 @@ public class ProductDaoJdbc implements ProductDao {
             );
             stmnt.setInt(1, id);
             ResultSet rs = stmnt.executeQuery();
-
             row = getProduct(rs);
+            logger.trace("Product with name {}, and ID {} found", row.getName(), row.getId());
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -86,6 +90,7 @@ public class ProductDaoJdbc implements ProductDao {
             );
             stmnt.setInt(1, id);
             stmnt.executeUpdate();
+            logger.trace("Product with ID {} removed from to DB", id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -107,6 +112,7 @@ public class ProductDaoJdbc implements ProductDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        logger.trace("Returned {} products", allProduct.size());
         return allProduct;
     }
 
